@@ -1,21 +1,20 @@
-package com.example.demo.Models;
+package com.example.pocJop.Models;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-public class CapaciteArret {
+public class Affluence {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String date;
-    private String sens;
-    private String hour;
-    private String premierTrain;
-    private String dernierTrain;
+    private String hourOfDay;
+    private int estimationParisUp;
+    private int estimationParisDown;
+    private int affluenceHabituelleUp;
+    private int affluenceHabituelleDown;
     
     // @ManyToOne
     // private Gare gare;
-    // @ManyToOne
-    // private Ligne ligne;
 }

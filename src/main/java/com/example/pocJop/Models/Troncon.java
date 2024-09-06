@@ -1,19 +1,20 @@
-package com.example.demo.Models;
+package com.example.pocJop.Models;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-public class OlympicEvent {
+public class Troncon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String start;
-    private String end;
-    private boolean isEventStart;
+    private String gareCode;
+    private String ligneCode;
+    private String sens;
+    private int ordre;
     
     // @ManyToOne
-    // private OlympicSite olympicSite;
+    // private Gare gare;
     // @ManyToOne
-    // private OlympicDiscipline olympicDiscipline;
+    // private Ligne ligne;
 }

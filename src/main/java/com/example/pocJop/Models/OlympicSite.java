@@ -1,4 +1,4 @@
-package com.example.demo.Models;
+package com.example.pocJop.Models;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

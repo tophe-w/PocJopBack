@@ -1,17 +1,18 @@
-package com.example.demo.Models;
+package com.example.pocJop.Models;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-public class Troncon {
+public class CapaciteArret {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String gareCode;
-    private String ligneCode;
+    private String date;
     private String sens;
-    private int ordre;
+    private String hour;
+    private String premierTrain;
+    private String dernierTrain;
     
     // @ManyToOne
     // private Gare gare;
