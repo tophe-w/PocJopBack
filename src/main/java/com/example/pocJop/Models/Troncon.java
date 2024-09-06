@@ -16,7 +16,7 @@ import lombok.Setter;
 public class Troncon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String gareCode;
     private String ligneCode;
     private String sens;

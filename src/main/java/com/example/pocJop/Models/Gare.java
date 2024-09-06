@@ -8,21 +8,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @Entity
 @NoArgsConstructor
 @Getter
 @Setter
-public class Gare{
+public class Gare {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String name;
     private String code;
     private String plan_de_gare;
     private String plan_de_gare_svg;
-    private String accessible;
-    
+    private String accessibilite;
+
     // @OneToMany(mappedBy = "gare")
     // private List<Ligne> lignes = new ArrayList<>();
     // @OneToMany(mappedBy = "gare")
