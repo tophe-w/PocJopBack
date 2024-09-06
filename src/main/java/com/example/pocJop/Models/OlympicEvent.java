@@ -16,7 +16,7 @@ import lombok.Setter;
 public class OlympicEvent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String start;
     private String end;
     private boolean isEventStart;

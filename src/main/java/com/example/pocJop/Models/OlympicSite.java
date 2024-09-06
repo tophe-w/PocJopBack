@@ -16,7 +16,7 @@ import lombok.Setter;
 public class OlympicSite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String code;
     private boolean navette;
     private boolean fontaine;

@@ -16,7 +16,7 @@ import lombok.Setter;
 public class CapaciteArret {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String date;
     private String sens;
     private String hour;

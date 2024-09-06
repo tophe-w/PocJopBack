@@ -15,7 +15,7 @@ import lombok.Setter;
 public class CapaciteDePassage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String sens;
     private String date;
     private String hour;

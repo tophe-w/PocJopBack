@@ -15,7 +15,7 @@ import lombok.Setter;
 public class Affluence {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String date;
     private String hourOfDay;
     private int estimationParisUp;

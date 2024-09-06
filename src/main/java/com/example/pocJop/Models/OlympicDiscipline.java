@@ -16,7 +16,7 @@ import lombok.Setter;
 public class OlympicDiscipline {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String name;
     private String code;
     
