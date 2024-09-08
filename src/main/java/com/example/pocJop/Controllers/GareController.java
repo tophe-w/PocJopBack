@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.pocJop.Models.Gare;
 import com.example.pocJop.Services.GareService;
-
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -45,6 +43,12 @@ public class GareController {
     @PostMapping("/update/{id}")
     public ResponseEntity<Gare> update(@PathVariable Long id, @RequestBody Gare gare) {
         return new ResponseEntity<>(gareService.updateGare(id, gare), HttpStatus.OK);
+    }
+
+    @GetMapping("/delete/{id}")
+    public ResponseEntity<String> delete(@PathVariable Long id) {
+        gareService.deleteGare(id);
+        return new ResponseEntity<>("La gare avec l'Id n°" + id + " a été supprimée", HttpStatus.OK);
     }
 
 }
