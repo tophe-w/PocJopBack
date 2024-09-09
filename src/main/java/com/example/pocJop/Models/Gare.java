@@ -1,9 +1,16 @@
 package com.example.pocJop.Models;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,9 +29,7 @@ public class Gare {
     private String plan_de_gare_svg;
     private String accessibilite;
 
-    // @OneToMany(mappedBy = "gare")
-    // private List<Ligne> lignes = new ArrayList<>();
-    // @OneToMany(mappedBy = "gare")
-    // private List<OlympicSite> olympicSites = new ArrayList<>();
-
+    @ManyToMany(mappedBy = "gares")
+    @JsonIgnoreProperties("gares")
+    private List<Ligne> lignes = new ArrayList<>();
 }

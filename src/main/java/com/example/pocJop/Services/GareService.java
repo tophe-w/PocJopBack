@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.pocJop.Models.Gare;
+import com.example.pocJop.Models.Ligne;
 import com.example.pocJop.Repository.GareRepository;
+import com.example.pocJop.Repository.LigneRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -15,6 +17,9 @@ public class GareService {
 
     @Autowired
     private GareRepository gareRepository;
+
+    @Autowired
+    private LigneRepository ligneRepository;
 
     public List<Gare> getAllGares() {
         List<Gare> gares = gareRepository.findAll();
@@ -33,6 +38,31 @@ public class GareService {
         return gareRepository.save(gare);
     }
    
+
+
+    public Gare addLignesByNameToGare(Long gareId, List<String> ligneNames) {
+        Gare gare = gareRepository.findById(gareId)
+                .orElseThrow(() -> new RuntimeException("La gare avec l'Id n°" + gareId + " n'est pas trouvée"));
+        List<Ligne> lignes = ligneRepository.findByNameIn(ligneNames);
+        if (lignes.isEmpty()) {
+            throw new RuntimeException("Aucune ligne trouvée avec les noms fournis : " + ligneNames);
+        }
+        gare.getLignes().addAll(lignes);
+
+        // Mettre à jour les associations dans les deux sens
+        for (Ligne ligne : lignes) {
+            if (!ligne.getGares().contains(gare)) {
+                ligne.getGares().add(gare);
+            }
+        }
+        gareRepository.save(gare);
+        ligneRepository.saveAll(lignes);
+
+        return gare;
+    }
+    
+
+
     public Gare updateGare(Long id, Gare gare) {
         
         System.out.println("Tentative de mise à jour de la gare avec l'ID : " + id);
@@ -60,9 +90,24 @@ public class GareService {
             majGare.setAccessibilite(gare.getAccessibilite());
             System.out.println("Mise à jour de l'accessibilité : " + gare.getAccessibilite());
     }
-        
+     if (gare.getLignes() != null) {
+        // Supprimer les anciennes associations
+        majGare.getLignes().clear();
+        // Ajouter les nouvelles lignes associées
+        for (Ligne ligne : gare.getLignes()) {
+            // Assurer que chaque ligne est correctement persistée
+            Ligne lignePersisted = ligneRepository.findById(ligne.getId())
+                    .orElseThrow(
+                            () -> new RuntimeException("Ligne avec l'Id n°" + ligne.getId() + " n'est pas trouvée"));
+            majGare.getLignes().add(lignePersisted);
+            // Mettre à jour l'association bidirectionnelle
+            if (!lignePersisted.getGares().contains(majGare)) {
+                lignePersisted.getGares().add(majGare);
+            }
+        }
+        System.out.println("Mise à jour des lignes associées à la gare");
+    }
 
-   
         majGare=gareRepository.save(majGare);
         System.out.println("Gare mise à jour et sauvegardée.");
         return majGare;

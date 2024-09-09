@@ -35,11 +35,18 @@ public class GareController {
         return new ResponseEntity<>(gareService.getGareById(id), HttpStatus.OK);
     }
 
+    
     @PostMapping("/create")
     public ResponseEntity<Gare> create(@RequestBody Gare gare) {
         return new ResponseEntity<>(gareService.createGare(gare), HttpStatus.CREATED);
     }
+    
+    @PostMapping("/{gareId}/lignes")
+    public Gare addLignesByNameToGare(@PathVariable Long gareId, @RequestBody List<String> ligneNames) {
+        return gareService.addLignesByNameToGare(gareId, ligneNames);
+    }
 
+    
     @PostMapping("/update/{id}")
     public ResponseEntity<Gare> update(@PathVariable Long id, @RequestBody Gare gare) {
         return new ResponseEntity<>(gareService.updateGare(id, gare), HttpStatus.OK);
