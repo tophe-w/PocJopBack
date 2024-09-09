@@ -33,4 +33,6 @@ public class Ligne {
     @JoinTable(name = "ligne_gare", joinColumns = @JoinColumn(name = "ligne_id"), inverseJoinColumns = @JoinColumn(name = "gare_id"))
     @JsonIgnoreProperties("lignes")  
     private List<Gare> gares = new ArrayList<>();
+
+    //eghzerth 
 }
