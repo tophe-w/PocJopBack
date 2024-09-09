@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.pocJop.Models.Ligne;
 import com.example.pocJop.Models.OlympicSite;
+import com.example.pocJop.Repository.LigneRepository;
 import com.example.pocJop.Repository.OlympicSiteRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -16,6 +18,9 @@ public class OlympicSiteService {
 
     @Autowired
     private OlympicSiteRepository olympicSiteRepository;
+
+    @Autowired
+    private LigneRepository ligneRepository;
 
     public List<OlympicSite> getAllOlympicSites() {
         List<OlympicSite> olympicSites = olympicSiteRepository.findAll();
@@ -51,6 +56,26 @@ public class OlympicSiteService {
         return majOlympicSite;
 
     }
+
+
+    public OlympicSite addLignesByNameToOlympicSite(Long olympicSiteId, List<String> ligneNames) {
+        OlympicSite olympicSite = olympicSiteRepository.findById(olympicSiteId)
+                .orElseThrow(() -> new RuntimeException("Le site olympique avec l'Id n°" + olympicSiteId + " n'est pas trouvée"));
+        List<Ligne> lignes = ligneRepository.findByNameIn(ligneNames);
+        if (lignes.isEmpty()) {
+            throw new RuntimeException("Aucune ligne trouvée avec les noms fournis : " + ligneNames);
+        }
+        olympicSite.getLignes().addAll(lignes);
+        for (Ligne ligne : lignes) {
+            if (!ligne.getOlympicSites().contains(olympicSite)) {
+                ligne.getOlympicSites().add(olympicSite);
+            }
+        }
+        olympicSiteRepository.save(olympicSite);
+        ligneRepository.saveAll(lignes);
+        return olympicSite;
+    }
+
 
     public void deleteOlympicSite(Long id) {
         olympicSiteRepository.deleteById(id);

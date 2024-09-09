@@ -46,7 +46,12 @@ public class GareController {
         return gareService.addLignesByNameToGare(gareId, ligneNames);
     }
 
-    
+    @PostMapping("/{gareId}/olympicSites")
+    public Gare addOlympicSitesByNameToGare(@PathVariable Long gareId, @RequestBody List<String> olympicSiteCodes) {
+        return gareService.addOlympicSitesByNameToGare(gareId, olympicSiteCodes);
+    }
+
+
     @PostMapping("/update/{id}")
     public ResponseEntity<Gare> update(@PathVariable Long id, @RequestBody Gare gare) {
         return new ResponseEntity<>(gareService.updateGare(id, gare), HttpStatus.OK);
