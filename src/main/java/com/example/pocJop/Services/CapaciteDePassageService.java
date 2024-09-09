@@ -61,7 +61,9 @@ public class CapaciteDePassageService {
             System.out.println("Mise à jour du nombre de trains par heure de la capaciteDePassage : "
                     + capaciteDePassage.getTrainsByHourCount());
         }
-        return capaciteDePassageRepository.save(majCapaciteDePassage);
+
+        majCapaciteDePassage = capaciteDePassageRepository.save(majCapaciteDePassage);
+        return majCapaciteDePassage;
     }
     
     public void deleteCapaciteDePassage(Long id) {
