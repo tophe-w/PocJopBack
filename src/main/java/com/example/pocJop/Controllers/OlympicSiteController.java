@@ -40,6 +40,11 @@ public class OlympicSiteController {
         return new ResponseEntity<>(olympicSiteService.createOlympicSite(olympicSite), HttpStatus.CREATED);
     }
 
+    @PostMapping("/{olympicSiteId}/lignes")
+    public OlympicSite addLignesByNameToOlympicSite(@PathVariable Long olympicSiteId, @RequestBody List<String> ligneNames) {
+        return olympicSiteService.addLignesByNameToOlympicSite(olympicSiteId, ligneNames);
+    }
+
     @PostMapping("/update/{id}")
     public ResponseEntity<OlympicSite> update(@PathVariable Long id, @RequestBody OlympicSite olympicSite) {
         return new ResponseEntity<>(olympicSiteService.updateOlympicSite(id, olympicSite), HttpStatus.OK);
