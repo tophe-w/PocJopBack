@@ -51,10 +51,10 @@ public class GareController {
         return gareService.addOlympicSitesByNameToGare(gareId, olympicSiteCodes);
     }
 
-    @PostMapping("/{gareId}/olympicEvents")
-      public Gare addOlympicEventsByNameToGare(@PathVariable Long gareId, @RequestBody List<String> olympicEventIds) {
-          return gareService.addOlympicEventsByNameToGare(gareId, olympicEventIds);
-      }
+    // @PostMapping("/{gareId}/olympicEvents")
+    //   public Gare addOlympicEventsByNameToGare(@PathVariable Long gareId, @RequestBody List<String> olympicEventIds) {
+    //       return gareService.addOlympicEventsByNameToGare(gareId, olympicEventIds);
+    //   }
 
     @PostMapping("/update/{id}")
     public ResponseEntity<Gare> update(@PathVariable Long id, @RequestBody Gare gare) {

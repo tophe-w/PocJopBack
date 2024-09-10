@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,19 +30,25 @@ public class OlympicEvent {
     private String end;
     private boolean isEventStart;
 
-    @ManyToMany
-    @JoinTable(name = "olympicEvent_gare", joinColumns = @JoinColumn(name = "olympicEvent_id"), inverseJoinColumns = @JoinColumn(name = "gare_id"))
-    @JsonIgnoreProperties("olympicEvents")
-    private List<Gare> gares = new ArrayList<>();
 
-    @OneToOne
-    @JoinColumn(name = "olympicSite_id")
-    @JsonIgnoreProperties("olympicEvents")
-    private OlympicSite olympicSite;
-
-    @OneToOne
+    @ManyToOne  
     @JoinColumn(name = "olympicDiscipline_id")
     @JsonIgnoreProperties("olympicEvents")
     private OlympicDiscipline olympicDiscipline;
+
+    // @ManyToMany
+    // @JoinTable(name = "olympicEvent_gare", joinColumns = @JoinColumn(name = "olympicEvent_id"), inverseJoinColumns = @JoinColumn(name = "gare_id"))
+    // @JsonIgnoreProperties("olympicEvents")
+    // private List<Gare> gares = new ArrayList<>();
+
+    // @OneToOne
+    // @JoinColumn(name = "olympicSite_id")
+    // @JsonIgnoreProperties("olympicEvents")
+    // private OlympicSite olympicSite;
+
+    // @OneToOne
+    // @JoinColumn(name = "olympicDiscipline_id")
+    // @JsonIgnoreProperties("olympicEvents")
+    // private OlympicDiscipline olympicDiscipline;
 
 }

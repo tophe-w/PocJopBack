@@ -50,25 +50,37 @@ public class OlympicEventService {
                 .orElseThrow(() -> new RuntimeException("L'événement olympique avec l'Id n°" + id + " is not found"));
     }
 
+    public OlympicEvent createOlympicEvent(OlympicEvent olympicEvent, String disciplinesNames) {
+        
+        OlympicDiscipline olympicDiscipline = olympicDisciplineRepository.findByName(disciplinesNames);
+        if (olympicDiscipline == null) {
+            throw new RuntimeException("Discipline olympique non trouvée avec le nom: " + disciplinesNames);
+        }
+        olympicEvent.setOlympicDiscipline(olympicDiscipline);
+        
+        return olympicEventRepository.save(olympicEvent);
+    }
 
 
-public OlympicEvent createOlympicEvent(OlympicEvent olympicEvent, Long siteId,Long olympicDisciplineId) {
-    // Trouver le site associé à l'ID donné
-    OlympicSite olympicSite = olympicSiteRepository.findById(siteId)
-            .orElseThrow(() -> new RuntimeException("Site olympique non trouvé avec l'ID: " + siteId));
+
     
-    // Associer le site à l'événement
-    olympicEvent.setOlympicSite(olympicSite);
-
-    // Trouver la discipline olympique associée à l'ID donné
-    OlympicDiscipline olympicDiscipline = olympicDisciplineRepository.findById(olympicDisciplineId)
-            .orElseThrow(
-                    () -> new RuntimeException("Discipline olympique non trouvée avec l'ID: " + olympicDisciplineId));
-   olympicEvent.setOlympicDiscipline(olympicDiscipline);         
+// public OlympicEvent createOlympicEvent(OlympicEvent olympicEvent, Long siteId,Long olympicDisciplineId) {
+//     // Trouver le site associé à l'ID donné
+//     OlympicSite olympicSite = olympicSiteRepository.findById(siteId)
+//             .orElseThrow(() -> new RuntimeException("Site olympique non trouvé avec l'ID: " + siteId));
     
-    // Sauvegarder l'événement avec le site associé
-    return olympicEventRepository.save(olympicEvent);
-}
+//     // Associer le site à l'événement
+//     olympicEvent.setOlympicSite(olympicSite);
+
+//     // Trouver la discipline olympique associée à l'ID donné
+//     OlympicDiscipline olympicDiscipline = olympicDisciplineRepository.findById(olympicDisciplineId)
+//             .orElseThrow(
+//                     () -> new RuntimeException("Discipline olympique non trouvée avec l'ID: " + olympicDisciplineId));
+//    olympicEvent.setOlympicDiscipline(olympicDiscipline);         
+    
+//     // Sauvegarder l'événement avec le site associé
+//     return olympicEventRepository.save(olympicEvent);
+// }
 
 
     public OlympicEvent updateOlympicEvent(Long id, OlympicEvent olympicEvent) {
