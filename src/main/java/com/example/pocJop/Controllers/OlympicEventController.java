@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.pocJop.Models.OlympicEvent;
@@ -35,12 +36,17 @@ public class OlympicEventController {
         return new ResponseEntity<>(olympicEventService.getOlympicEventById(id), HttpStatus.OK);
     }
 
-    @PostMapping("/create/{siteId}/{olympicDisciplineId}")
-    public ResponseEntity<OlympicEvent> create(@RequestBody OlympicEvent olympicEvent, @PathVariable Long siteId,
-            @PathVariable Long olympicDisciplineId) {
-        return new ResponseEntity<>(olympicEventService.createOlympicEvent(olympicEvent, siteId,
-                olympicDisciplineId), HttpStatus.CREATED);
+    @PostMapping("/create")
+    public ResponseEntity<OlympicEvent> create(@RequestBody OlympicEvent olympicEvent , @RequestParam String disciplinesNames) {
+        return new ResponseEntity<>(olympicEventService.createOlympicEvent(olympicEvent, disciplinesNames), HttpStatus.CREATED);
     }
+
+    // @PostMapping("/create/{siteId}/{olympicDisciplineId}")
+    // public ResponseEntity<OlympicEvent> create(@RequestBody OlympicEvent olympicEvent, @PathVariable Long siteId,
+    //         @PathVariable Long olympicDisciplineId) {
+    //     return new ResponseEntity<>(olympicEventService.createOlympicEvent(olympicEvent, siteId,
+    //             olympicDisciplineId), HttpStatus.CREATED);
+    // }
 
     @PostMapping("/update/{id}")
     public ResponseEntity<OlympicEvent> update(@PathVariable Long id, @RequestBody OlympicEvent olympicEvent) {

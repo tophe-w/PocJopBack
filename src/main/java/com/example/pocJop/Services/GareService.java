@@ -84,25 +84,27 @@ public class GareService {
         return gare;
     }
 
-    public Gare addOlympicEventsByNameToGare(Long gareId, List<String> olympicEventIds) {
-        Gare gare = gareRepository.findById(gareId)
-                .orElseThrow(() -> new RuntimeException("La gare avec l'Id n°" + gareId + " n'est pas trouvée"));
-        List<OlympicEvent> olympicEvents = olympicEventRepository.findByIdIn(olympicEventIds);
-        if (olympicEvents.isEmpty()) {
-            throw new RuntimeException("Aucun événement olympique trouvé avec les noms fournis : " + olympicEventIds);
-        }
-        gare.getOlympicEvents().addAll(olympicEvents);
-        for (OlympicEvent olympicEvent : olympicEvents) {
-            if (!olympicEvent.getGares().contains(gare)) {
-                olympicEvent.getGares().add(gare);
-            }
-        }
-        gareRepository.save(gare);
-        olympicEventRepository.saveAll(olympicEvents);
-        return gare;
+    
+
+    // public Gare addOlympicEventsByNameToGare(Long gareId, List<String> olympicEventIds) {
+    //     Gare gare = gareRepository.findById(gareId)
+    //             .orElseThrow(() -> new RuntimeException("La gare avec l'Id n°" + gareId + " n'est pas trouvée"));
+    //     List<OlympicEvent> olympicEvents = olympicEventRepository.findByIdIn(olympicEventIds);
+    //     if (olympicEvents.isEmpty()) {
+    //         throw new RuntimeException("Aucun événement olympique trouvé avec les noms fournis : " + olympicEventIds);
+    //     }
+    //     gare.getOlympicEvents().addAll(olympicEvents);
+    //     for (OlympicEvent olympicEvent : olympicEvents) {
+    //         if (!olympicEvent.getGares().contains(gare)) {
+    //             olympicEvent.getGares().add(gare);
+    //         }
+    //     }
+    //     gareRepository.save(gare);
+    //     olympicEventRepository.saveAll(olympicEvents);
+    //     return gare;
 
 
-    }
+    // }
 
     public Gare updateGare(Long id, Gare gare) {
         System.out.println("Tentative de mise à jour de la gare avec l'ID : " + id);

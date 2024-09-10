@@ -36,10 +36,15 @@ public class OlympicSite {
     @JsonIgnoreProperties("olympicSites")
     private List<Gare> gares = new ArrayList<>();
     
-    @ManyToMany(mappedBy = "olympicSites")
-    @JsonIgnoreProperties("olympicSites")
-    private List<Ligne> lignes = new ArrayList<>();
+    // @ManyToMany(mappedBy = "olympicSites")
+    // @JsonIgnoreProperties({ "olympicSites", "lignes" })
+    // private List<Ligne> lignes = new ArrayList<>();
 
+
+    @ManyToMany
+    @JoinTable(name = "olympicSite_olympicDiscipline", joinColumns= @JoinColumn(name = "olympicSite_id"), inverseJoinColumns = @JoinColumn(name = "olympicDiscipline_id"))
+    @JsonIgnoreProperties("olympicSites")
+    private List<OlympicDiscipline> olympicDisciplines = new ArrayList<>();
 
 
 }

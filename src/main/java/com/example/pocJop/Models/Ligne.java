@@ -34,8 +34,8 @@ public class Ligne {
     @JsonIgnoreProperties("lignes")  
     private List<Gare> gares = new ArrayList<>();
 
-    @ManyToMany
-    @JoinTable(name = "ligne_olympicSite", joinColumns = @JoinColumn(name = "ligne_id"), inverseJoinColumns = @JoinColumn(name = "olympicSite_id"))
-    @JsonIgnoreProperties("lignes")
-    private List<OlympicSite> olympicSites = new ArrayList<>();
+    // @ManyToMany
+    // @JoinTable(name = "ligne_olympicSite", joinColumns = @JoinColumn(name = "ligne_id"), inverseJoinColumns = @JoinColumn(name = "olympicSite_id"))
+    // @JsonIgnoreProperties("lignes")
+    // private List<OlympicSite> olympicSites = new ArrayList<>();
 }
