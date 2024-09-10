@@ -36,4 +36,8 @@ public class Gare {
     @ManyToMany(mappedBy = "gares")
     @JsonIgnoreProperties("gares")
     private List<OlympicSite> olympicSites = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "gares")
+    @JsonIgnoreProperties("gares")
+    private List<OlympicEvent> olympicEvents = new ArrayList<>();
 }
