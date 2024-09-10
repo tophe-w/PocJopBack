@@ -35,9 +35,11 @@ public class OlympicEventController {
         return new ResponseEntity<>(olympicEventService.getOlympicEventById(id), HttpStatus.OK);
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<OlympicEvent> create(@RequestBody OlympicEvent olympicEvent) {
-        return new ResponseEntity<>(olympicEventService.createOlympicEvent(olympicEvent), HttpStatus.CREATED);
+    @PostMapping("/create/{siteId}/{olympicDisciplineId}")
+    public ResponseEntity<OlympicEvent> create(@RequestBody OlympicEvent olympicEvent, @PathVariable Long siteId,
+            @PathVariable Long olympicDisciplineId) {
+        return new ResponseEntity<>(olympicEventService.createOlympicEvent(olympicEvent, siteId,
+                olympicDisciplineId), HttpStatus.CREATED);
     }
 
     @PostMapping("/update/{id}")

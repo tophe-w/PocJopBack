@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.pocJop.Models.Gare;
 import com.example.pocJop.Models.Ligne;
+import com.example.pocJop.Models.OlympicEvent;
 import com.example.pocJop.Models.OlympicSite;
 import com.example.pocJop.Repository.GareRepository;
 import com.example.pocJop.Repository.LigneRepository;
+import com.example.pocJop.Repository.OlympicEventRepository;
 import com.example.pocJop.Repository.OlympicSiteRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -25,6 +27,9 @@ public class GareService {
 
     @Autowired
     private OlympicSiteRepository olympicSiteRepository;
+
+    @Autowired
+    private OlympicEventRepository olympicEventRepository;
 
     public List<Gare> getAllGares() {
         List<Gare> gares = gareRepository.findAll();
@@ -51,8 +56,6 @@ public class GareService {
             throw new RuntimeException("Aucune ligne trouvée avec les noms fournis : " + ligneNames);
         }
         gare.getLignes().addAll(lignes);
-
-        // Mettre à jour les associations dans les deux sens
         for (Ligne ligne : lignes) {
             if (!ligne.getGares().contains(gare)) {
                 ligne.getGares().add(gare);
@@ -60,7 +63,6 @@ public class GareService {
         }
         gareRepository.save(gare);
         ligneRepository.saveAll(lignes);
-
         return gare;
     }
 
@@ -80,6 +82,26 @@ public class GareService {
         gareRepository.save(gare);
         olympicSiteRepository.saveAll(olympicSites);
         return gare;
+    }
+
+    public Gare addOlympicEventsByNameToGare(Long gareId, List<String> olympicEventIds) {
+        Gare gare = gareRepository.findById(gareId)
+                .orElseThrow(() -> new RuntimeException("La gare avec l'Id n°" + gareId + " n'est pas trouvée"));
+        List<OlympicEvent> olympicEvents = olympicEventRepository.findByIdIn(olympicEventIds);
+        if (olympicEvents.isEmpty()) {
+            throw new RuntimeException("Aucun événement olympique trouvé avec les noms fournis : " + olympicEventIds);
+        }
+        gare.getOlympicEvents().addAll(olympicEvents);
+        for (OlympicEvent olympicEvent : olympicEvents) {
+            if (!olympicEvent.getGares().contains(gare)) {
+                olympicEvent.getGares().add(gare);
+            }
+        }
+        gareRepository.save(gare);
+        olympicEventRepository.saveAll(olympicEvents);
+        return gare;
+
+
     }
 
     public Gare updateGare(Long id, Gare gare) {
