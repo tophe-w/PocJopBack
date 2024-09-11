@@ -6,9 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.pocJop.Models.OlympicDiscipline;
-import com.example.pocJop.Models.OlympicSite;
 import com.example.pocJop.Repository.OlympicDisciplineRepository;
-import com.example.pocJop.Repository.OlympicSiteRepository;
+
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,9 +18,7 @@ public class OlympicDisciplineService {
     @Autowired
     private OlympicDisciplineRepository olympicDisciplineRepository;
 
-    @Autowired
-    private OlympicSiteRepository olympicSiteRepository;
-
+ 
     public List<OlympicDiscipline> getAllOlympicDisciplines() {
         List<OlympicDiscipline> olympicDisciplines = olympicDisciplineRepository.findAll();
         if (olympicDisciplines.isEmpty()) {

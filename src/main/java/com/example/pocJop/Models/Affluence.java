@@ -1,9 +1,13 @@
 package com.example.pocJop.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,7 +26,9 @@ public class Affluence {
     private int estimationParisDown;
     private int affluenceHabituelleUp;
     private int affluenceHabituelleDown;
-    
-    // @ManyToOne
-    // private Gare gare;
+
+    @OneToOne
+    @JoinColumn(name = "gares_id")
+    @JsonIgnoreProperties("affluence")
+    private Gare gares;
 }

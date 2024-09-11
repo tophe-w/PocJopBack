@@ -1,17 +1,25 @@
 package com.example.pocJop.Services;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.example.pocJop.Models.Affluence;
+import com.example.pocJop.Models.CapaciteArret;
+import com.example.pocJop.Models.CapaciteDePassage;
 import com.example.pocJop.Models.Gare;
 import com.example.pocJop.Models.Ligne;
-import com.example.pocJop.Models.OlympicEvent;
 import com.example.pocJop.Models.OlympicSite;
+import com.example.pocJop.Models.Troncon;
+import com.example.pocJop.Repository.AffluenceRepository;
+import com.example.pocJop.Repository.CapaciteArretRepository;
+import com.example.pocJop.Repository.CapaciteDePassageRepository;
 import com.example.pocJop.Repository.GareRepository;
 import com.example.pocJop.Repository.LigneRepository;
-import com.example.pocJop.Repository.OlympicEventRepository;
 import com.example.pocJop.Repository.OlympicSiteRepository;
+import com.example.pocJop.Repository.TronconRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -29,7 +37,16 @@ public class GareService {
     private OlympicSiteRepository olympicSiteRepository;
 
     @Autowired
-    private OlympicEventRepository olympicEventRepository;
+    private TronconRepository tronconRepository;
+
+    @Autowired
+    private AffluenceRepository affluenceRepository;
+
+    @Autowired
+    private CapaciteArretRepository capaciteArretRepository;
+
+    @Autowired
+    private CapaciteDePassageRepository capaciteDePassageRepository;
 
     public List<Gare> getAllGares() {
         List<Gare> gares = gareRepository.findAll();
@@ -84,27 +101,93 @@ public class GareService {
         return gare;
     }
 
+    public Gare addAffluenceByIdToGare(Long gareId, Long affluenceId) {
+        Gare gare = gareRepository.findById(gareId)
+                .orElseThrow(() -> new RuntimeException("La gare avec l'Id n°" + gareId + " n'est pas trouvée"));
+        Affluence affluence = affluenceRepository.findById(affluenceId)
+                .orElseThrow(
+                        () -> new RuntimeException("L'affluence avec l'Id n°" + affluenceId + " n'est pas trouvée"));
+        gare.setAffluence(affluence);
+        affluence.setGares(gare);
+
+        gareRepository.save(gare);
+        affluenceRepository.save(affluence);
+        return gare;
+
+    }
+
+    public Gare addCapaciteDePassageByIdToGare(Long gareId, Long capaciteDePassageId) {
+        Gare gare = gareRepository.findById(gareId)
+                .orElseThrow(() -> new RuntimeException("La gare avec l'Id n°" + gareId + " n'est pas trouvée"));
+        List<CapaciteDePassage> capaciteDePassages = capaciteDePassageRepository
+                .findAllById(Collections.singletonList(capaciteDePassageId));
+        if (capaciteDePassages.isEmpty()) {
+            throw new RuntimeException(
+                    "Aucune capacité de passage trouvée avec les IDs fournis : " + capaciteDePassageId);
+        }
+        for (CapaciteDePassage capaciteDePassage : capaciteDePassages) {
+            if (capaciteDePassage.getGare() != null && !capaciteDePassage.getGare().equals(gare)) {
+                capaciteDePassage.getGare().getCapaciteDePassages().remove(capaciteDePassage);
+            }
+            capaciteDePassage.setGare(gare);
+        }
+        gare.getCapaciteDePassages().addAll(capaciteDePassages);
+        capaciteDePassageRepository.saveAll(capaciteDePassages);
+        gareRepository.save(gare);
+
+        return gare;
+    }
+    
+    public Gare addCapaciteArretByIdToGare(Long gareId, Long capaciteArretId) {
+        Gare gare = gareRepository.findById(gareId)
+                .orElseThrow(() -> new RuntimeException("La gare avec l'Id n°" + gareId + " n'est pas trouvée"));
+        List<CapaciteArret> capaciteArrets = capaciteArretRepository
+                .findAllById(Collections.singletonList(capaciteArretId));
+        if (capaciteArrets.isEmpty()) {
+            throw new RuntimeException(
+                    "Aucune capacité de passage trouvée avec les IDs fournis : " + capaciteArretId);
+        }
+        for (CapaciteArret capaciteArret : capaciteArrets) {
+            if (capaciteArret.getGare() != null && !capaciteArret.getGare().equals(gare)) {
+                capaciteArret.getGare().getCapaciteDePassages().remove(capaciteArret);
+            }
+            capaciteArret.setGare(gare);
+        }
+        gare.getCapaciteArrets().addAll(capaciteArrets);
+        capaciteArretRepository.saveAll(capaciteArrets);
+        gareRepository.save(gare);
+
+        return gare;
+    }
+
+
+    public Gare addTronconByIdToGare(Long gareId, Long tronconId) {
+        Gare gare = gareRepository.findById(gareId)
+                .orElseThrow(() -> new RuntimeException("La gare avec l'Id n°" + gareId + " n'est pas trouvée"));
+        List<Troncon> troncons = tronconRepository
+                .findAllById(Collections.singletonList(tronconId));
+        if (troncons.isEmpty()) {
+            throw new RuntimeException(
+                    "Aucune capacité de passage trouvée avec les IDs fournis : " + tronconId);
+        }
+        for (Troncon troncon : troncons) {
+            if (troncon.getGare() != null && !troncon.getGare().equals(gare)) {
+                troncon.getGare().getCapaciteDePassages().remove(troncon);
+            }
+            troncon.setGare(gare);
+        }
+        gare.getTroncons().addAll(troncons);
+        tronconRepository.saveAll(troncons);
+        gareRepository.save(gare);
+
+        return gare;
+    }
     
 
-    // public Gare addOlympicEventsByNameToGare(Long gareId, List<String> olympicEventIds) {
-    //     Gare gare = gareRepository.findById(gareId)
-    //             .orElseThrow(() -> new RuntimeException("La gare avec l'Id n°" + gareId + " n'est pas trouvée"));
-    //     List<OlympicEvent> olympicEvents = olympicEventRepository.findByIdIn(olympicEventIds);
-    //     if (olympicEvents.isEmpty()) {
-    //         throw new RuntimeException("Aucun événement olympique trouvé avec les noms fournis : " + olympicEventIds);
-    //     }
-    //     gare.getOlympicEvents().addAll(olympicEvents);
-    //     for (OlympicEvent olympicEvent : olympicEvents) {
-    //         if (!olympicEvent.getGares().contains(gare)) {
-    //             olympicEvent.getGares().add(gare);
-    //         }
-    //     }
-    //     gareRepository.save(gare);
-    //     olympicEventRepository.saveAll(olympicEvents);
-    //     return gare;
 
 
-    // }
+
+
 
     public Gare updateGare(Long id, Gare gare) {
         System.out.println("Tentative de mise à jour de la gare avec l'ID : " + id);
@@ -132,11 +215,9 @@ public class GareService {
             System.out.println("Mise à jour de l'accessibilité : " + gare.getAccessibilite());
         }
         if (gare.getLignes() != null) {
-            // Supprimer les anciennes associations
             majGare.getLignes().clear();
-            // Ajouter les nouvelles lignes associées
             for (Ligne ligne : gare.getLignes()) {
-                // Assurer que chaque ligne est correctement persistée
+              
                 Ligne lignePersisted = ligneRepository.findById(ligne.getId())
                         .orElseThrow(
                                 () -> new RuntimeException(

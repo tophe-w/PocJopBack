@@ -11,5 +11,5 @@ public interface OlympicDisciplineRepository extends JpaRepository<OlympicDiscip
     List<OlympicDiscipline> findByNameIn(List<String> disciplinesNames);
 
     OlympicDiscipline findByName(String disciplinesNames);
-    
+
 }
