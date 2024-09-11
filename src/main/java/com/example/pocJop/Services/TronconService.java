@@ -39,14 +39,7 @@ public class TronconService {
         Troncon majTroncon = tronconRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Le troncon avec l'Id n°" + id + " n'est pas trouvée"));
 
-        if (troncon.getGareCode() != null) {
-            majTroncon.setGareCode(troncon.getGareCode());
-            System.out.println("Mise à jour du nom du troncon : " + troncon.getGareCode());
-        }
-        if (troncon.getLigneCode() != null) {
-            majTroncon.setLigneCode(troncon.getLigneCode());
-            System.out.println("Mise à jour de la distance du troncon : " + troncon.getLigneCode());
-        }
+       
         if (troncon.getSens() != null) {
             majTroncon.setSens(troncon.getSens());
             System.out.println("Mise à jour du temps du troncon : " + troncon.getSens());

@@ -4,19 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
-import com.example.pocJop.Models.Gare;
 import com.example.pocJop.Models.OlympicDiscipline;
 import com.example.pocJop.Models.OlympicEvent;
-import com.example.pocJop.Models.OlympicSite;
-import com.example.pocJop.Repository.GareRepository;
 import com.example.pocJop.Repository.OlympicDisciplineRepository;
 import com.example.pocJop.Repository.OlympicEventRepository;
-import com.example.pocJop.Repository.OlympicSiteRepository;
-
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -27,11 +18,7 @@ public class OlympicEventService {
     @Autowired
     private OlympicEventRepository olympicEventRepository;
 
-    @Autowired
-    private GareRepository gareRepository;
 
-    @Autowired
-    private OlympicSiteRepository olympicSiteRepository;
   
     @Autowired
     private OlympicDisciplineRepository olympicDisciplineRepository;

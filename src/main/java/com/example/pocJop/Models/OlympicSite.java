@@ -12,7 +12,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,19 +25,19 @@ public class OlympicSite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String name;
     private String code;
+    private String planDeDesserte;
+    private String illustration;
     private boolean navette;
     private boolean fontaine;
+  
     
 
     @ManyToMany
     @JoinTable(name = "olympicSite_gare", joinColumns= @JoinColumn(name = "olympicSite_id"), inverseJoinColumns = @JoinColumn(name = "gare_id"))
     @JsonIgnoreProperties("olympicSites")
     private List<Gare> gares = new ArrayList<>();
-    
-    // @ManyToMany(mappedBy = "olympicSites")
-    // @JsonIgnoreProperties({ "olympicSites", "lignes" })
-    // private List<Ligne> lignes = new ArrayList<>();
 
 
     @ManyToMany
