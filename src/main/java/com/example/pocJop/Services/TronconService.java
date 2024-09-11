@@ -44,7 +44,7 @@ public class TronconService {
             majTroncon.setSens(troncon.getSens());
             System.out.println("Mise à jour du temps du troncon : " + troncon.getSens());
         }
-        if (troncon.getOrdre() != 0) {
+        if (troncon.getOrdre() != null) {
             majTroncon.setOrdre(troncon.getOrdre());
             System.out.println("Mise à jour du départ du troncon : " + troncon.getOrdre());
 

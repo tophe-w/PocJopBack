@@ -22,7 +22,8 @@ public class OlympicEvent {
     private Long id;
     private String start;
     private String end;
-    private boolean isEventStart;
+    private Boolean isEventStart;
+    
 
 
     @ManyToOne  

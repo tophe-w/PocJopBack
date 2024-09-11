@@ -83,21 +83,31 @@ public class GareService {
         return gare;
     }
 
-    public Gare addOlympicSitesByNameToGare(Long gareId, List<String> olympicSiteCodes) {
+    public Gare addOlympicSitesByIdToGare(Long gareId, List<Long> olympicSiteIds) {
         Gare gare = gareRepository.findById(gareId)
                 .orElseThrow(() -> new RuntimeException("La gare avec l'Id n°" + gareId + " n'est pas trouvée"));
-        List<OlympicSite> olympicSites = olympicSiteRepository.findByCodeIn(olympicSiteCodes);
+
+        // Récupérer les sites olympiques via leurs IDs
+        List<OlympicSite> olympicSites = olympicSiteRepository.findByIdIn(olympicSiteIds);
+
         if (olympicSites.isEmpty()) {
-            throw new RuntimeException("Aucun site olympique trouvé avec les noms fournis : " + olympicSiteCodes);
+            throw new RuntimeException("Aucun site olympique trouvé avec les IDs fournis : " + olympicSiteIds);
         }
+
+        // Ajouter les sites olympiques à la gare
         gare.getOlympicSites().addAll(olympicSites);
+
+        // Ajouter la gare à chaque site olympique si elle n'est pas déjà présente
         for (OlympicSite olympicSite : olympicSites) {
             if (!olympicSite.getGares().contains(gare)) {
                 olympicSite.getGares().add(gare);
             }
         }
+
+        // Sauvegarder les changements
         gareRepository.save(gare);
         olympicSiteRepository.saveAll(olympicSites);
+
         return gare;
     }
 
@@ -202,12 +212,12 @@ public class GareService {
             majGare.setCode(gare.getCode());
             System.out.println("Mise à jour du code de la gare : " + gare.getCode());
         }
-        if (gare.getPlan_de_gare() != null) {
-            majGare.setPlan_de_gare(gare.getPlan_de_gare());
+        if (gare.getPlanDeGare() != null) {
+            majGare.setPlanDeGare(gare.getPlanDeGare());
             System.out.println("Mise à jour du plan de gare");
         }
-        if (gare.getPlan_de_gare_svg() != null) {
-            majGare.setPlan_de_gare_svg(gare.getPlan_de_gare_svg());
+        if (gare.getPlanDeGareSvg() != null) {
+            majGare.setPlanDeGareSvg(gare.getPlanDeGareSvg());
             System.out.println("Mise à jour du plan SVG de gare");
         }
         if (gare.getAccessibilite() != null) {

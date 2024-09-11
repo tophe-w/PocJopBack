@@ -83,8 +83,8 @@ public class OlympicEventService {
             majOlympicEvent.setEnd(olympicEvent.getEnd());
             System.out.println("Mise à jour du code de l'événement olympique : " + olympicEvent.getEnd());
         }
-        majOlympicEvent.setEventStart(olympicEvent.isEventStart());
-        System.out.println("Mise à jour de l'état isEventStart : " + olympicEvent.isEventStart());
+        majOlympicEvent.setIsEventStart(olympicEvent.getIsEventStart());
+        System.out.println("Mise à jour de l'état isEventStart : " + olympicEvent.getIsEventStart());
         return olympicEventRepository.save(majOlympicEvent);
     }
 

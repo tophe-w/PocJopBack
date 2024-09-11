@@ -72,9 +72,7 @@ public class OlympicSiteService {
             System.out.println("Mise à jour du code du site olympique : " + olympicSite.getCode());
 
         }
-        majOlympicSite.setNavette(olympicSite.isNavette());
-        System.out.println("Mise à jour de l'état isEventStart : " + olympicSite.isNavette());
-
+     
         return majOlympicSite;
 
     }
