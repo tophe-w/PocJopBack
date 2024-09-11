@@ -22,7 +22,8 @@ public class Troncon {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String sens;
-    private int ordre;
+    private String ordre;
+    private String cleTroncon;
     
     @ManyToOne
     @JoinColumn(name = "gare_id")

@@ -29,8 +29,8 @@ public class OlympicSite {
     private String code;
     private String planDeDesserte;
     private String illustration;
-    private boolean navette;
-    private boolean fontaine;
+    // private boolean navette;
+    // private boolean fontaine;
   
     
 

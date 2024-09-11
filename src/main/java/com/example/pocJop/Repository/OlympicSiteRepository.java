@@ -9,5 +9,7 @@ import com.example.pocJop.Models.OlympicSite;
 public interface OlympicSiteRepository extends JpaRepository<OlympicSite, Long> {
 
     public List<OlympicSite> findByCodeIn(List<String> olympicSiteCodes);
+
+    public List<OlympicSite> findByIdIn(List<Long> olympicSiteIds);
     
 }

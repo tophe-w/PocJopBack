@@ -26,15 +26,16 @@ public class Gare {
     private Long id;
     private String name;
     private String code;
-    private String plan_de_gare;
-    private String plan_de_gare_svg;
+    private String idGareIdfm;
+    private String planDeGare;
+    private String planDeGareSvg;
     private String accessibilite;
 
     @ManyToMany(mappedBy = "gares")
     @JsonIgnoreProperties("gares")
     private List<Ligne> lignes = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "gares")
+    @ManyToMany
     @JsonIgnoreProperties("gares")
     private List<OlympicSite> olympicSites = new ArrayList<>();
 
