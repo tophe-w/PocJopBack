@@ -6,6 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -35,7 +36,7 @@ public class Gare {
     @JsonIgnoreProperties("gares")
     private List<Ligne> lignes = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "gares", fetch = FetchType.EAGER)
     @JsonIgnoreProperties("gares")
     private List<OlympicSite> olympicSites = new ArrayList<>();
 

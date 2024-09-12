@@ -87,24 +87,17 @@ public class GareService {
         Gare gare = gareRepository.findById(gareId)
                 .orElseThrow(() -> new RuntimeException("La gare avec l'Id n°" + gareId + " n'est pas trouvée"));
 
-        // Récupérer les sites olympiques via leurs IDs
         List<OlympicSite> olympicSites = olympicSiteRepository.findByIdIn(olympicSiteIds);
-
         if (olympicSites.isEmpty()) {
             throw new RuntimeException("Aucun site olympique trouvé avec les IDs fournis : " + olympicSiteIds);
         }
-
-        // Ajouter les sites olympiques à la gare
         gare.getOlympicSites().addAll(olympicSites);
 
-        // Ajouter la gare à chaque site olympique si elle n'est pas déjà présente
         for (OlympicSite olympicSite : olympicSites) {
             if (!olympicSite.getGares().contains(gare)) {
                 olympicSite.getGares().add(gare);
             }
         }
-
-        // Sauvegarder les changements
         gareRepository.save(gare);
         olympicSiteRepository.saveAll(olympicSites);
 
@@ -147,7 +140,7 @@ public class GareService {
 
         return gare;
     }
-    
+
     public Gare addCapaciteArretByIdToGare(Long gareId, Long capaciteArretId) {
         Gare gare = gareRepository.findById(gareId)
                 .orElseThrow(() -> new RuntimeException("La gare avec l'Id n°" + gareId + " n'est pas trouvée"));
@@ -170,7 +163,6 @@ public class GareService {
         return gare;
     }
 
-
     public Gare addTronconByIdToGare(Long gareId, Long tronconId) {
         Gare gare = gareRepository.findById(gareId)
                 .orElseThrow(() -> new RuntimeException("La gare avec l'Id n°" + gareId + " n'est pas trouvée"));
@@ -192,12 +184,6 @@ public class GareService {
 
         return gare;
     }
-    
-
-
-
-
-
 
     public Gare updateGare(Long id, Gare gare) {
         System.out.println("Tentative de mise à jour de la gare avec l'ID : " + id);
@@ -227,7 +213,7 @@ public class GareService {
         if (gare.getLignes() != null) {
             majGare.getLignes().clear();
             for (Ligne ligne : gare.getLignes()) {
-              
+
                 Ligne lignePersisted = ligneRepository.findById(ligne.getId())
                         .orElseThrow(
                                 () -> new RuntimeException(
