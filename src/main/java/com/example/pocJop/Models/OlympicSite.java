@@ -35,10 +35,9 @@ public class OlympicSite {
     
 
     @ManyToMany
-    @JoinTable(name = "olympicSite_gare", joinColumns= @JoinColumn(name = "olympicSite_id"), inverseJoinColumns = @JoinColumn(name = "gare_id"))
+    @JoinTable(name = "olympicSite_gare", joinColumns = @JoinColumn(name = "olympicSite_id"), inverseJoinColumns = @JoinColumn(name = "gare_id"))
     @JsonIgnoreProperties("olympicSites")
     private List<Gare> gares = new ArrayList<>();
-
 
     @ManyToMany
     @JoinTable(name = "olympicSite_olympicDiscipline", joinColumns= @JoinColumn(name = "olympicSite_id"), inverseJoinColumns = @JoinColumn(name = "olympicDiscipline_id"))
