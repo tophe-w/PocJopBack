@@ -75,13 +75,13 @@ public class OlympicEventService {
         OlympicEvent majOlympicEvent = olympicEventRepository.findById(id)
                 .orElseThrow(
                         () -> new RuntimeException("L'événement olympique avec l'Id n°" + id + " n'est pas trouvée"));
-        if (olympicEvent.getStart() != null) {
-            majOlympicEvent.setStart(olympicEvent.getStart());
-            System.out.println("Mise à jour du nom de l'événement olympique : " + olympicEvent.getStart());
+        if (olympicEvent.getStartEvent() != null) {
+            majOlympicEvent.setStartEvent(olympicEvent.getStartEvent());
+            System.out.println("Mise à jour du nom de l'événement olympique : " + olympicEvent.getStartEvent());
         }
-        if (olympicEvent.getEnd() != null) {
-            majOlympicEvent.setEnd(olympicEvent.getEnd());
-            System.out.println("Mise à jour du code de l'événement olympique : " + olympicEvent.getEnd());
+        if (olympicEvent.getEndEvent() != null) {
+            majOlympicEvent.setEndEvent(olympicEvent.getEndEvent());
+            System.out.println("Mise à jour du code de l'événement olympique : " + olympicEvent.getEndEvent());
         }
         majOlympicEvent.setIsEventStart(olympicEvent.getIsEventStart());
         System.out.println("Mise à jour de l'état isEventStart : " + olympicEvent.getIsEventStart());
