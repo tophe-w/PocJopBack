@@ -1,17 +1,21 @@
 package com.example.pocJop.Services;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.pocJop.Dto.GareDto;
 import com.example.pocJop.Models.Affluence;
 import com.example.pocJop.Models.CapaciteArret;
 import com.example.pocJop.Models.CapaciteDePassage;
 import com.example.pocJop.Models.Gare;
 import com.example.pocJop.Models.Ligne;
 import com.example.pocJop.Models.OlympicSite;
+import com.example.pocJop.Models.Region;
 import com.example.pocJop.Models.Troncon;
 import com.example.pocJop.Repository.AffluenceRepository;
 import com.example.pocJop.Repository.CapaciteArretRepository;
@@ -19,6 +23,7 @@ import com.example.pocJop.Repository.CapaciteDePassageRepository;
 import com.example.pocJop.Repository.GareRepository;
 import com.example.pocJop.Repository.LigneRepository;
 import com.example.pocJop.Repository.OlympicSiteRepository;
+import com.example.pocJop.Repository.RegionRepository;
 import com.example.pocJop.Repository.TronconRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -48,6 +53,9 @@ public class GareService {
     @Autowired
     private CapaciteDePassageRepository capaciteDePassageRepository;
 
+    @Autowired
+    private RegionRepository regionRepository;
+
     public List<Gare> getAllGares() {
         List<Gare> gares = gareRepository.findAll();
         if (gares.isEmpty()) {
@@ -55,6 +63,27 @@ public class GareService {
         }
         return gares;
     }
+
+    
+    public List<GareDto> getAllGaresDtos() {
+
+        List<Gare> gares = gareRepository.findAll();
+        List<GareDto> gareDtos = new ArrayList<>();
+        for (Gare gare : gares) {
+            GareDto gareDto = new GareDto();
+            gareDto.setId(gare.getId());
+            gareDto.setName(gare.getName());
+            gareDto.setCode(gare.getCode());
+            gareDto.setIdGareIdfm(gare.getIdGareIdfm());
+            gareDto.setPlanDeGare(gare.getPlanDeGare());
+            gareDto.setPlanDeGareSvg(gare.getPlanDeGareSvg());
+            gareDto.setAccessibilite(gare.getAccessibilite());
+            gareDtos.add(gareDto);
+        }
+        return gareDtos;
+    }
+
+    
 
     public Gare getGareById(Long id) {
         return gareRepository.findById(id)
@@ -235,4 +264,17 @@ public class GareService {
     public void deleteGare(Long id) {
         gareRepository.deleteById(id);
     }
+
+    public Gare addRegionByIdToGare(Long gareId, Long regionId) {
+        Gare gare = gareRepository.findById(gareId)
+                .orElseThrow(() -> new RuntimeException("La gare avec l'Id n°" + gareId + " n'est pas trouvée"));
+        Region region = regionRepository.findById(regionId)
+                .orElseThrow(() -> new RuntimeException("La région avec l'Id n°" + regionId + " n'est pas trouvée"));
+        gare.setRegion(region);
+        region.getGares().add(gare);
+        gareRepository.save(gare);
+        regionRepository.save(region);
+        return gare;
+    }
+
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.pocJop.Dto.GareDto;
 import com.example.pocJop.Models.Gare;
 import com.example.pocJop.Services.GareService;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class GareController {
 
     private final GareService gareService;
+
+    @GetMapping("/get/allGares")
+    public ResponseEntity<List<GareDto>> getAllGaresDtos() {
+        return new ResponseEntity<>(gareService.getAllGaresDtos(), HttpStatus.OK);
+    }
 
     @GetMapping("/get/all")
     public ResponseEntity<List<Gare>> getAllGares() {
@@ -90,6 +96,18 @@ public class GareController {
 
         try {
             Gare updatedGare = gareService.addTronconByIdToGare(gareId, tronconId);
+            return new ResponseEntity<>(updatedGare, HttpStatus.OK);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping("/{gareId}/region/{regionId}")
+    public ResponseEntity<Gare> addRegionByIdToGare(
+            @PathVariable Long gareId,
+            @PathVariable Long regionId) {
+        try {
+            Gare updatedGare = gareService.addRegionByIdToGare(gareId, regionId);
             return new ResponseEntity<>(updatedGare, HttpStatus.OK);
         } catch (RuntimeException e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);

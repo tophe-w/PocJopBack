@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.pocJop.Dto.LigneDto;
 import com.example.pocJop.Models.Ligne;
 import com.example.pocJop.Services.LigneService;
 
@@ -24,6 +25,12 @@ import lombok.RequiredArgsConstructor;
 public class LigneController {
 
     private final LigneService ligneService;
+
+
+    @GetMapping("/get/allLignes")
+    public ResponseEntity<List<LigneDto>> getAllLignesDtos() {
+        return new ResponseEntity<>(ligneService.getAllLignesDtos(), HttpStatus.OK);
+    }
 
     @GetMapping("/get/all")
     public ResponseEntity<List<Ligne>> getAllLignes() {
