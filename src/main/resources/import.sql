@@ -1,5 +1,32 @@
 --Ligne
 SET client_encoding TO UTF8;
+
+INSERT INTO region (name) VALUES ('Auvergne-Rhône-Alpes');
+
+INSERT INTO region (name) VALUES ('Bourgogne-Franche-Comté');
+
+INSERT INTO region (name) VALUES ('Bretagne');
+
+INSERT INTO region (name) VALUES ('Centre-Val de Loire');
+
+INSERT INTO region (name) VALUES ('Corse');
+
+INSERT INTO region (name) VALUES ('Grand Est');
+
+INSERT INTO region (name) VALUES ('Hauts-de-France');
+
+INSERT INTO region (name) VALUES ('Île-de-France');
+
+INSERT INTO region (name) VALUES ('Normandie');
+
+INSERT INTO region (name) VALUES ('Nouvelle-Aquitaine');
+
+INSERT INTO region (name) VALUES ('Occitanie');
+
+INSERT INTO region (name) VALUES ('Pays de la Loire');
+
+INSERT INTO region (name) VALUES ('Provence-Alpes-Côte d\'Azur');
+
 INSERT INTO ligne (name, code) VALUES ('RER A', 'A');
 INSERT INTO ligne (name, code) VALUES ('RER B', 'B');
 INSERT INTO ligne (name, code) VALUES ('RER C', 'C');

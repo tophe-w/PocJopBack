@@ -1,10 +1,12 @@
 package com.example.pocJop.Services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.pocJop.Dto.LigneDto;
 import com.example.pocJop.Models.Ligne;
 import com.example.pocJop.Repository.LigneRepository;
 
@@ -24,6 +26,19 @@ public class LigneService {
             throw new RuntimeException("There is no ligne");
         }
         return lignes;
+    }
+
+    public List<LigneDto> getAllLignesDtos() {
+        List<Ligne> lignes = ligneRepository.findAll();
+        List<LigneDto> lignesDtos = new ArrayList<>();
+       for (Ligne ligne : lignes) {
+            LigneDto ligneDto = new LigneDto();
+            ligneDto.setId(ligne.getId());
+            ligneDto.setName(ligne.getName());
+            ligneDto.setCode(ligne.getCode());
+            lignesDtos.add(ligneDto);
+        }
+        return lignesDtos;
     }
 
     public Ligne getLigneById(Long id) {
