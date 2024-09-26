@@ -7,13 +7,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class GareDto {
+public class RegionDtoPagePrincipale {
     private Long id;
     private String name;
-    private String code;
-    private String idGareIdfm;
-    private String planDeGare;
-    private String planDeGareSvg;
-    private String accessibilite;
+    private int nbGares;
+    private int nbLieux;
     
 }

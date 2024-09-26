@@ -20,6 +20,7 @@ public class OlympicEvent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String name;
     private String startEvent;
     private String endEvent;
     private Boolean isEventStart;

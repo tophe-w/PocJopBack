@@ -2,13 +2,14 @@ package com.example.pocJop.Services;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.example.pocJop.Dto.GareDto;
+import com.example.pocJop.Dto.GareDtoPagePrincipale;
 import com.example.pocJop.Models.Affluence;
 import com.example.pocJop.Models.CapaciteArret;
 import com.example.pocJop.Models.CapaciteDePassage;
@@ -57,33 +58,29 @@ public class GareService {
     private RegionRepository regionRepository;
 
     public List<Gare> getAllGares() {
-        List<Gare> gares = gareRepository.findAll();
+        List<Gare> gares = gareRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
         if (gares.isEmpty()) {
             throw new RuntimeException("There is no gare");
         }
         return gares;
     }
 
-    
-    public List<GareDto> getAllGaresDtos() {
-
-        List<Gare> gares = gareRepository.findAll();
-        List<GareDto> gareDtos = new ArrayList<>();
+    public List<GareDtoPagePrincipale> getAllGaresDtos() {
+        List<Gare> gares = gareRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
+        List<GareDtoPagePrincipale> gareDtos = new ArrayList<>();
         for (Gare gare : gares) {
-            GareDto gareDto = new GareDto();
+            GareDtoPagePrincipale gareDto = new GareDtoPagePrincipale();
             gareDto.setId(gare.getId());
             gareDto.setName(gare.getName());
             gareDto.setCode(gare.getCode());
-            gareDto.setIdGareIdfm(gare.getIdGareIdfm());
-            gareDto.setPlanDeGare(gare.getPlanDeGare());
-            gareDto.setPlanDeGareSvg(gare.getPlanDeGareSvg());
-            gareDto.setAccessibilite(gare.getAccessibilite());
+            if (gare.getRegion() != null) {
+                gareDto.setRegion(gare.getRegion().getName());
+            }
+            gareDto.setNbLieux(gare.getOlympicSites().size());
             gareDtos.add(gareDto);
         }
         return gareDtos;
     }
-
-    
 
     public Gare getGareById(Long id) {
         return gareRepository.findById(id)

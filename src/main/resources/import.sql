@@ -9,8 +9,6 @@ INSERT INTO region (name) VALUES ('Bretagne');
 
 INSERT INTO region (name) VALUES ('Centre-Val de Loire');
 
-INSERT INTO region (name) VALUES ('Corse');
-
 INSERT INTO region (name) VALUES ('Grand Est');
 
 INSERT INTO region (name) VALUES ('Hauts-de-France');
