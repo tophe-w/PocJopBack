@@ -27,10 +27,6 @@ public class OlympicEvent {
     
 
 
-    @ManyToOne  
-    @JoinColumn(name = "olympicDiscipline_id")
-    @JsonIgnoreProperties("olympicEvents")
-    private OlympicDiscipline olympicDiscipline;
 
     // @ManyToMany
     // @JoinTable(name = "olympicEvent_gare", joinColumns = @JoinColumn(name = "olympicEvent_id"), inverseJoinColumns = @JoinColumn(name = "gare_id"))

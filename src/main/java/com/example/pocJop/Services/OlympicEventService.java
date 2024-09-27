@@ -4,9 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.example.pocJop.Models.OlympicDiscipline;
 import com.example.pocJop.Models.OlympicEvent;
-import com.example.pocJop.Repository.OlympicDisciplineRepository;
 import com.example.pocJop.Repository.OlympicEventRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -19,9 +17,6 @@ public class OlympicEventService {
     private OlympicEventRepository olympicEventRepository;
 
 
-  
-    @Autowired
-    private OlympicDisciplineRepository olympicDisciplineRepository;
 
 
     public List<OlympicEvent> getAllOlympicEvents() {
@@ -37,16 +32,7 @@ public class OlympicEventService {
                 .orElseThrow(() -> new RuntimeException("L'événement olympique avec l'Id n°" + id + " is not found"));
     }
 
-    public OlympicEvent createOlympicEvent(OlympicEvent olympicEvent, String disciplinesNames) {
-        
-        OlympicDiscipline olympicDiscipline = olympicDisciplineRepository.findByName(disciplinesNames);
-        if (olympicDiscipline == null) {
-            throw new RuntimeException("Discipline olympique non trouvée avec le nom: " + disciplinesNames);
-        }
-        olympicEvent.setOlympicDiscipline(olympicDiscipline);
-        
-        return olympicEventRepository.save(olympicEvent);
-    }
+    
 
 
 
