@@ -28,6 +28,7 @@ public class Site {
     private String name;
     private String town;
     private String description;
+    private int capacity;
 
     @ManyToMany
     @JoinTable(name = "site_gare", joinColumns = @JoinColumn(name = "site_id"), inverseJoinColumns = @JoinColumn(name = "gare_id"))

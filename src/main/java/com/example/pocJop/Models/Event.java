@@ -14,6 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -35,9 +36,7 @@ public class Event {
     @ManyToOne(fetch = FetchType.EAGER)
     private Site site;
 
-    @ManyToMany
-    @JoinTable(name = "event_category", joinColumns = @JoinColumn(name = "event_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
-    @JsonIgnoreProperties("events")  
-    private List<Category> categories = new ArrayList<>();
-
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Category category;
 }

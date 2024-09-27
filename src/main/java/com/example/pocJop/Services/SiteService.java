@@ -7,8 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.pocJop.Models.Event;
 import com.example.pocJop.Models.Gare;
-import com.example.pocJop.Models.OlympicSite;
-import com.example.pocJop.Models.Region;
 import com.example.pocJop.Models.Site;
 import com.example.pocJop.Repository.EventRepository;
 import com.example.pocJop.Repository.GareRepository;
