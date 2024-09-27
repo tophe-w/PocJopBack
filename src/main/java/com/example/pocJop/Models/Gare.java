@@ -37,10 +37,7 @@ public class Gare {
     @JsonIgnoreProperties("gares")
     private List<Ligne> lignes = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "gares", fetch = FetchType.EAGER)
-    @JsonIgnoreProperties("gares")
-    private List<OlympicSite> olympicSites = new ArrayList<>();
-
+   
     @OneToMany(mappedBy = "gare")
     @JsonIgnoreProperties("gare")
     private List<CapaciteDePassage> capaciteDePassages = new ArrayList<>();

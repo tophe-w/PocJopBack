@@ -28,9 +28,6 @@ public class OlympicDiscipline {
 
 
 
-    @ManyToMany(mappedBy = "olympicDisciplines")
-    @JsonIgnoreProperties({ "olympicDisciplines", "gares" })
-    private List<OlympicSite> olympicSites = new ArrayList<>();
 
     @OneToMany(mappedBy = "olympicDiscipline")
     @JsonIgnoreProperties("olympicDiscipline")

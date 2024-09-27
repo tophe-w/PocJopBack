@@ -53,10 +53,7 @@ public class GareController {
         return gareService.addLignesByNameToGare(gareId, ligneNames);
     }
 
-    @PostMapping("/{gareId}/olympicSites")
-    public Gare addOlympicSitesByIdToGare(@PathVariable Long gareId, @RequestBody List<Long> olympicSiteIds) {
-        return gareService.addOlympicSitesByIdToGare(gareId, olympicSiteIds);
-    }
+    
 
     @PostMapping("/{gareId}/affluence/{affluenceId}")
     public Gare addAffluenceByIdToGare(@PathVariable Long gareId, @PathVariable Long affluenceId) {

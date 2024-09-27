@@ -44,7 +44,7 @@ public class RegionService {
             int totalLieux = 0;
 
             for (Gare gare : gares) {
-                totalLieux += gare.getOlympicSites().size(); 
+                totalLieux += gare.getSites().size(); 
             }
 
             regionDto.setNbLieux(totalLieux);
