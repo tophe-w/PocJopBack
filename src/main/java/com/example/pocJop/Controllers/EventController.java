@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.pocJop.Models.Event;
-import com.example.pocJop.Models.Gare;
 import com.example.pocJop.Services.EventService;
 
 import lombok.RequiredArgsConstructor;
