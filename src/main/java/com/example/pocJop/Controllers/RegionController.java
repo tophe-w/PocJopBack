@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.pocJop.Dto.RegionDtoPagePrincipale;
 import com.example.pocJop.Models.Region;
 import com.example.pocJop.Services.RegionService;
 
@@ -29,6 +30,10 @@ public class RegionController {
     @GetMapping("/get/all")
     public ResponseEntity<List<Region>> getAllRegions() {
         return new ResponseEntity<>(regionService.getAllRegions(), HttpStatus.OK);
+    }
+    @GetMapping("/get/allRegions")
+    public ResponseEntity<List<RegionDtoPagePrincipale>> getAllRegionsDtos() {
+        return new ResponseEntity<>(regionService.getAllRegionsDtos(), HttpStatus.OK);
     }
 
     @GetMapping("/get/{id}")

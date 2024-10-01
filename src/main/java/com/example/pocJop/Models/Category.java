@@ -3,6 +3,7 @@ package com.example.pocJop.Models;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
@@ -18,14 +19,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Region {
-     @Id
+public class Category {
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "region")
-     @JsonIgnoreProperties("region")
-    private List<Gare> gares = new ArrayList<>();
-    
+    @OneToMany(mappedBy = "category")
+    @JsonIgnoreProperties("category")
+    private List<Event> events = new ArrayList<>();
+
 }

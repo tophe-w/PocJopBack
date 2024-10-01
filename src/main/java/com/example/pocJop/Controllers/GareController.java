@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.pocJop.Dto.GareDto;
+import com.example.pocJop.Dto.GareDtos.GareDtoPagePrincipale;
 import com.example.pocJop.Models.Gare;
 import com.example.pocJop.Services.GareService;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +28,7 @@ public class GareController {
     private final GareService gareService;
 
     @GetMapping("/get/allGares")
-    public ResponseEntity<List<GareDto>> getAllGaresDtos() {
+    public ResponseEntity<List<GareDtoPagePrincipale>> getAllGaresDtos() {
         return new ResponseEntity<>(gareService.getAllGaresDtos(), HttpStatus.OK);
     }
 
@@ -52,10 +52,7 @@ public class GareController {
         return gareService.addLignesByNameToGare(gareId, ligneNames);
     }
 
-    @PostMapping("/{gareId}/olympicSites")
-    public Gare addOlympicSitesByIdToGare(@PathVariable Long gareId, @RequestBody List<Long> olympicSiteIds) {
-        return gareService.addOlympicSitesByIdToGare(gareId, olympicSiteIds);
-    }
+    
 
     @PostMapping("/{gareId}/affluence/{affluenceId}")
     public Gare addAffluenceByIdToGare(@PathVariable Long gareId, @PathVariable Long affluenceId) {

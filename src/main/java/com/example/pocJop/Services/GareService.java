@@ -2,19 +2,19 @@ package com.example.pocJop.Services;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.example.pocJop.Dto.GareDto;
+import com.example.pocJop.Dto.GareDtos.GareDtoPagePrincipale;
 import com.example.pocJop.Models.Affluence;
 import com.example.pocJop.Models.CapaciteArret;
 import com.example.pocJop.Models.CapaciteDePassage;
 import com.example.pocJop.Models.Gare;
 import com.example.pocJop.Models.Ligne;
-import com.example.pocJop.Models.OlympicSite;
 import com.example.pocJop.Models.Region;
 import com.example.pocJop.Models.Troncon;
 import com.example.pocJop.Repository.AffluenceRepository;
@@ -22,7 +22,6 @@ import com.example.pocJop.Repository.CapaciteArretRepository;
 import com.example.pocJop.Repository.CapaciteDePassageRepository;
 import com.example.pocJop.Repository.GareRepository;
 import com.example.pocJop.Repository.LigneRepository;
-import com.example.pocJop.Repository.OlympicSiteRepository;
 import com.example.pocJop.Repository.RegionRepository;
 import com.example.pocJop.Repository.TronconRepository;
 
@@ -38,8 +37,6 @@ public class GareService {
     @Autowired
     private LigneRepository ligneRepository;
 
-    @Autowired
-    private OlympicSiteRepository olympicSiteRepository;
 
     @Autowired
     private TronconRepository tronconRepository;
@@ -57,33 +54,29 @@ public class GareService {
     private RegionRepository regionRepository;
 
     public List<Gare> getAllGares() {
-        List<Gare> gares = gareRepository.findAll();
+        List<Gare> gares = gareRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
         if (gares.isEmpty()) {
             throw new RuntimeException("There is no gare");
         }
         return gares;
     }
 
-    
-    public List<GareDto> getAllGaresDtos() {
-
-        List<Gare> gares = gareRepository.findAll();
-        List<GareDto> gareDtos = new ArrayList<>();
+    public List<GareDtoPagePrincipale> getAllGaresDtos() {
+        List<Gare> gares = gareRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
+        List<GareDtoPagePrincipale> gareDtos = new ArrayList<>();
         for (Gare gare : gares) {
-            GareDto gareDto = new GareDto();
+            GareDtoPagePrincipale gareDto = new GareDtoPagePrincipale();
             gareDto.setId(gare.getId());
             gareDto.setName(gare.getName());
             gareDto.setCode(gare.getCode());
-            gareDto.setIdGareIdfm(gare.getIdGareIdfm());
-            gareDto.setPlanDeGare(gare.getPlanDeGare());
-            gareDto.setPlanDeGareSvg(gare.getPlanDeGareSvg());
-            gareDto.setAccessibilite(gare.getAccessibilite());
+            if (gare.getRegion() != null) {
+                gareDto.setRegion(gare.getRegion().getName());
+            }
+            gareDto.setNbLieux(gare.getSites().size());
             gareDtos.add(gareDto);
         }
         return gareDtos;
     }
-
-    
 
     public Gare getGareById(Long id) {
         return gareRepository.findById(id)
@@ -112,26 +105,7 @@ public class GareService {
         return gare;
     }
 
-    public Gare addOlympicSitesByIdToGare(Long gareId, List<Long> olympicSiteIds) {
-        Gare gare = gareRepository.findById(gareId)
-                .orElseThrow(() -> new RuntimeException("La gare avec l'Id n°" + gareId + " n'est pas trouvée"));
-
-        List<OlympicSite> olympicSites = olympicSiteRepository.findByIdIn(olympicSiteIds);
-        if (olympicSites.isEmpty()) {
-            throw new RuntimeException("Aucun site olympique trouvé avec les IDs fournis : " + olympicSiteIds);
-        }
-        gare.getOlympicSites().addAll(olympicSites);
-
-        for (OlympicSite olympicSite : olympicSites) {
-            if (!olympicSite.getGares().contains(gare)) {
-                olympicSite.getGares().add(gare);
-            }
-        }
-        gareRepository.save(gare);
-        olympicSiteRepository.saveAll(olympicSites);
-
-        return gare;
-    }
+   
 
     public Gare addAffluenceByIdToGare(Long gareId, Long affluenceId) {
         Gare gare = gareRepository.findById(gareId)

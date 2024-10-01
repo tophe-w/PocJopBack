@@ -1,5 +1,12 @@
 package com.example.pocJop.Dto;
 
+import java.util.List;
+import java.util.ArrayList;
+
+
+
+
+
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -7,13 +14,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class GareDto {
+public class RegionDtoPagePrincipale {
     private Long id;
     private String name;
-    private String code;
-    private String idGareIdfm;
-    private String planDeGare;
-    private String planDeGareSvg;
-    private String accessibilite;
+    private int nbGares;
+    private int nbLieux;
     
 }
