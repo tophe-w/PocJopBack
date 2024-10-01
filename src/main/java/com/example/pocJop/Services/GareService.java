@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.example.pocJop.Dto.GareDtoPagePrincipale;
+import com.example.pocJop.Dto.GareDtos.GareDtoPagePrincipale;
 import com.example.pocJop.Models.Affluence;
 import com.example.pocJop.Models.CapaciteArret;
 import com.example.pocJop.Models.CapaciteDePassage;
