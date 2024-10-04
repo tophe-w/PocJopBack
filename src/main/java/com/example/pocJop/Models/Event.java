@@ -34,9 +34,11 @@ public class Event {
     private int nbPeopleExpected;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("events")
     private Site site;
 
     
     @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("events")
     private Category category;
 }

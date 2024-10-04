@@ -1,4 +1,4 @@
-package com.example.pocJop.Dto;
+package com.example.pocJop.Dto.RegionDtos;
 
 import java.util.List;
 import java.util.ArrayList;
