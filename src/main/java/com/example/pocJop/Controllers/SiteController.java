@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.pocJop.Dto.SiteDto;
 import com.example.pocJop.Models.Site;
 import com.example.pocJop.Services.SiteService;
 
@@ -33,6 +34,10 @@ public class SiteController {
     @GetMapping("/get/{id}")
     public ResponseEntity<Site> getSiteById(@PathVariable Long id) {
         return new ResponseEntity<>(siteService.getSiteById(id), HttpStatus.OK);
+    }
+    @GetMapping("/get/siteDto/{id}")
+    public ResponseEntity<SiteDto> getSiteDtoById(@PathVariable Long id) {
+        return new ResponseEntity<>(siteService.getSiteDtoById(id), HttpStatus.OK);
     }
 
     @PostMapping("/create")

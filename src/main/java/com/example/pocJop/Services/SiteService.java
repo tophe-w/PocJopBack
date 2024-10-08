@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.pocJop.Dto.SiteDto;
 import com.example.pocJop.Models.Event;
 import com.example.pocJop.Models.Gare;
 import com.example.pocJop.Models.Site;
@@ -38,6 +39,22 @@ public class SiteService {
     public Site getSiteById(Long id) {
         return siteRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Site not found with id: " + id));
+    }
+
+    public SiteDto getSiteDtoById(Long id) {
+        Site site = siteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Site not found with id: " + id));
+        SiteDto siteDto = new SiteDto();
+        siteDto.setId(site.getId());
+        siteDto.setName(site.getName());
+        siteDto.setTown(site.getTown());
+        siteDto.setDescription(site.getDescription());
+        siteDto.setCapacity(site.getCapacity());
+        siteDto.setPhoto(site.getPhoto());
+        siteDto.setPlanDeSite(site.getPlanDeSite());
+        siteDto.setAddress(site.getAddress());
+        return siteDto;
+        
     }
 
     public Site createSite(Site site) {

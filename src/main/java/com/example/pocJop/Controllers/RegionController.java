@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.pocJop.Dto.RegionDtoPagePrincipale;
+import com.example.pocJop.Dto.RegionDtos.RegionDtoPagePrincipale;
+import com.example.pocJop.Dto.RegionDtos.RegionWithGareAndSites;
 import com.example.pocJop.Models.Region;
 import com.example.pocJop.Services.RegionService;
 
@@ -37,9 +38,12 @@ public class RegionController {
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Region> getRegionById(@PathVariable Long id) {
-        return new ResponseEntity<>(regionService.getRegionById(id), HttpStatus.OK);
+    public ResponseEntity<RegionWithGareAndSites> getRegionByIdGaresListAndNbLieux(@PathVariable Long id) {
+        return new ResponseEntity<RegionWithGareAndSites>(regionService.getRegionByIdGaresListAndNbLieux(id), HttpStatus.OK);
     }
+   
+   
+
 
     @PostMapping("/create")
     public ResponseEntity<Region> create(@RequestBody Region region) {

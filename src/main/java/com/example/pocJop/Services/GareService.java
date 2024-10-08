@@ -8,8 +8,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import java.util.stream.Collectors;
 
+import com.example.pocJop.Dto.SiteDto;
 import com.example.pocJop.Dto.GareDtos.GareDtoPagePrincipale;
+import com.example.pocJop.Dto.GareDtos.GareDtoSelectedGare;
 import com.example.pocJop.Models.Affluence;
 import com.example.pocJop.Models.CapaciteArret;
 import com.example.pocJop.Models.CapaciteDePassage;
@@ -82,6 +85,32 @@ public class GareService {
         return gareRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("La gare avec l'Id n°" + id + " is not found"));
     }
+
+    public GareDtoSelectedGare getSelectedGareById(Long id) {
+        Gare gare = gareRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("La gare avec l'Id n°" + id + " is not found"));
+        GareDtoSelectedGare gareDto = new GareDtoSelectedGare();
+        gareDto.setId(gare.getId());
+        gareDto.setName(gare.getName());
+        gareDto.setPlanDeGare(gare.getPlanDeGare());
+        gareDto.setPlanDeGareSvg(gare.getPlanDeGareSvg());
+       List<SiteDto> siteDtos = gare.getSites().stream()
+                .map(site -> {
+                    SiteDto siteDto = new SiteDto();
+                    siteDto.setId(site.getId());
+                    siteDto.setName(site.getName());
+                    siteDto.setDescription(site.getDescription());
+                    siteDto.setTown(site.getTown());
+                    siteDto.setCapacity(site.getCapacity());
+                     siteDto.setPhoto(site.getPhoto());
+                    return siteDto;
+                })
+                .collect(Collectors.toList());
+
+        gareDto.setSites(siteDtos);
+        return gareDto;
+    }
+            
 
     public Gare createGare(Gare gare) {
         return gareRepository.save(gare);

@@ -1,6 +1,5 @@
 package com.example.pocJop.Controllers;
 
-
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.pocJop.Dto.GareDtos.GareDtoPagePrincipale;
+import com.example.pocJop.Dto.GareDtos.GareDtoSelectedGare;
 import com.example.pocJop.Models.Gare;
 import com.example.pocJop.Services.GareService;
 import lombok.RequiredArgsConstructor;
@@ -41,6 +41,11 @@ public class GareController {
     public ResponseEntity<Gare> getGareById(@PathVariable Long id) {
         return new ResponseEntity<>(gareService.getGareById(id), HttpStatus.OK);
     }
+    
+    @GetMapping("/get/selectedGare/{id}")
+    public ResponseEntity<GareDtoSelectedGare> getSelectedGareById(@PathVariable Long id) {
+        return new ResponseEntity<>(gareService.getSelectedGareById(id), HttpStatus.OK);
+    }
 
     @PostMapping("/create")
     public ResponseEntity<Gare> create(@RequestBody Gare gare) {
@@ -51,8 +56,6 @@ public class GareController {
     public Gare addLignesByNameToGare(@PathVariable Long gareId, @RequestBody List<String> ligneNames) {
         return gareService.addLignesByNameToGare(gareId, ligneNames);
     }
-
-    
 
     @PostMapping("/{gareId}/affluence/{affluenceId}")
     public Gare addAffluenceByIdToGare(@PathVariable Long gareId, @PathVariable Long affluenceId) {
@@ -72,7 +75,6 @@ public class GareController {
         }
     }
 
-   
     @PostMapping("/{gareId}/capaciteArret/{capaciteArretId}")
     public ResponseEntity<Gare> addCapaciteArretByIdToGare(
             @PathVariable Long gareId,
@@ -84,7 +86,6 @@ public class GareController {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
-
 
     @PostMapping("/{gareId}/troncon/{tronconId}")
     public ResponseEntity<Gare> addTronconByIdToGare(
@@ -110,7 +111,6 @@ public class GareController {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
-  
 
     @PostMapping("/update/{id}")
     public ResponseEntity<Gare> update(@PathVariable Long id, @RequestBody Gare gare) {
