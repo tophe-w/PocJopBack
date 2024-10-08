@@ -6,9 +6,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import com.example.pocJop.Models.Event;
+import com.example.pocJop.Repository.EventRepository;
 import com.example.pocJop.Services.EventService;
 
 import lombok.RequiredArgsConstructor;
@@ -26,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class EventController {
 
     private final EventService eventService;
+    private final EventRepository eventRepository;
 
     @GetMapping("/get/all")
     public ResponseEntity<List<Event>> getAllEvents() {
@@ -41,5 +46,17 @@ public class EventController {
         return new ResponseEntity<>(eventService.createEvent(event), HttpStatus.CREATED);
     }
     
-    
+
+    @GetMapping("/countByCategory")
+    public List<Object[]> getEventsCountByCategory(Long regionId, String searchDate) {
+        // Formatter pour parser la chaîne de date
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+
+        // Conversion de la chaîne en LocalDateTime
+        LocalDateTime date = LocalDateTime.parse(searchDate, formatter);
+
+        // Appel à la méthode du repository avec un LocalDateTime
+        return eventRepository.countEventsByCategoryInRegionAndDate(regionId, date);
+    }
+
 }

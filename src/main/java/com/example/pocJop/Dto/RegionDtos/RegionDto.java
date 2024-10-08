@@ -7,10 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class RegionDtoPagePrincipale {
+public class RegionDto {
     private Long id;
     private String name;
-    private int nbGares;
-    private int nbLieux;
     
 }

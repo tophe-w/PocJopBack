@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.pocJop.Models.Category;
-import com.example.pocJop.Models.Site;
 import com.example.pocJop.Repository.CategoryRepository;
 
 import lombok.RequiredArgsConstructor;
