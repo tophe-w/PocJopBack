@@ -102,7 +102,7 @@ public class GareService {
                     siteDto.setDescription(site.getDescription());
                     siteDto.setTown(site.getTown());
                     siteDto.setCapacity(site.getCapacity());
-                     siteDto.setPhoto(site.getPhoto());
+                    siteDto.setPhoto(site.getPhoto());
                     return siteDto;
                 })
                 .collect(Collectors.toList());

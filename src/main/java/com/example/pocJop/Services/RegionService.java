@@ -76,6 +76,7 @@ public class RegionService {
                     gareDto.setId(gare.getId());
                     gareDto.setName(gare.getName());
                     gareDto.setSiteName(gare.getSites().stream().map(site -> site.getName()).collect(Collectors.toList()));   
+                    gareDto.setSiteId(gare.getSites().stream().map(site -> site.getId()).collect(Collectors.toList()));
                     gareDto.setNbSites(gare.getSites().size()); 
                     return gareDto;
                 })

@@ -13,6 +13,7 @@ public class GareDtoListNameAndSites {
     private Long id;
     private String name;
     private List<String> siteName;
+    private List<Long> siteId;
     private int nbSites;
 
 }
