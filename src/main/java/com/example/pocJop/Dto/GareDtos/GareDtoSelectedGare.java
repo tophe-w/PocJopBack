@@ -5,7 +5,6 @@ package com.example.pocJop.Dto.GareDtos;
 import java.util.List;
 
 import com.example.pocJop.Dto.SiteDto;
-import com.example.pocJop.Models.Site;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

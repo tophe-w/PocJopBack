@@ -14,6 +14,7 @@ public class GareDtoListNameAndSites {
     private String name;
     private List<String> siteName;
     private List<Long> siteId;
+    private List<String> siteTown;
     private int nbSites;
 
 }
