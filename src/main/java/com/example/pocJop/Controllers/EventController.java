@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import com.example.pocJop.Dto.EventCategoryCountDto;
 import com.example.pocJop.Models.Event;
 import com.example.pocJop.Repository.EventRepository;
 import com.example.pocJop.Services.EventService;
@@ -48,15 +49,11 @@ public class EventController {
     
 
     @GetMapping("/countByCategory")
-    public List<Object[]> getEventsCountByCategory(Long regionId, String searchDate) {
-        // Formatter pour parser la chaîne de date
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+    public ResponseEntity<List<EventCategoryCountDto>> getEventsCountByCategory(
+            @RequestParam Long regionId,
+            @RequestParam String searchDate) {
 
-        // Conversion de la chaîne en LocalDateTime
-        LocalDateTime date = LocalDateTime.parse(searchDate, formatter);
-
-        // Appel à la méthode du repository avec un LocalDateTime
-        return eventRepository.countEventsByCategoryInRegionAndDate(regionId, date);
+        List<EventCategoryCountDto> eventsCount = eventService.getEventsCountByCategory(regionId, searchDate);
+        return ResponseEntity.ok(eventsCount);
     }
-
 }

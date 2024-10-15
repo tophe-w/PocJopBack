@@ -1,12 +1,13 @@
 package com.example.pocJop.Services;
 
 import java.util.List;
-
+import java.util.stream.Collectors;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.pocJop.Dto.EventCategoryCountDto;
 import com.example.pocJop.Models.Category;
 import com.example.pocJop.Models.Event;
 import com.example.pocJop.Repository.CategoryRepository;
@@ -52,15 +53,22 @@ public class EventService {
     }
 
 
-    public List<Object[]> getEventsCountByCategory(Long regionId, String searchDate) {
+    public List<EventCategoryCountDto> getEventsCountByCategory(Long regionId, String searchDate) {
         // Formatter pour parser la date
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-
-        // Conversion de la chaîne en LocalDateTime
         LocalDateTime date = LocalDateTime.parse(searchDate, formatter);
 
-        // Appel au repository avec un LocalDateTime
-        return eventRepository.countEventsByCategoryInRegionAndDate(regionId, date);
-    }
+        // Récupérer la liste brute Object[] depuis le repository
+        List<Object[]> rawResults = eventRepository.countEventsByCategoryInRegionAndDate(regionId, date);
 
+        // Mapper chaque Object[] en un objet EventCategoryCountDto
+        return rawResults.stream()
+                .map(result -> new EventCategoryCountDto(
+                        (String) result[0],  // Le premier élément est la catégorie (String)
+                        ((Number) result[1]).intValue()  // Le deuxième élément est le nombre d'événements (int)
+                ))
+                .collect(Collectors.toList());
+    }
 }
+    
+
