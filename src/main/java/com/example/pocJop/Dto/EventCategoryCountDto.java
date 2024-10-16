@@ -13,12 +13,13 @@ import lombok.Setter;
 public class EventCategoryCountDto {
     private String category;
     private int count;
+    private List<EventDto> events;
     
    
-    public EventCategoryCountDto(String category, int count ) {
+    public EventCategoryCountDto(String category, int count, List<EventDto> events) {
         this.category = category;
         this.count = count;
-
+        this.events = events;
        
     }
 

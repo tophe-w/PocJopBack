@@ -52,7 +52,7 @@ public class EventController {
     public ResponseEntity<List<EventCategoryCountDto>> getEventsCountByCategory(
             @RequestParam Long regionId,
             @RequestParam String searchDate) {
-
+    
         List<EventCategoryCountDto> eventsCount = eventService.getEventsCountByCategory(regionId, searchDate);
         return ResponseEntity.ok(eventsCount);
     }
