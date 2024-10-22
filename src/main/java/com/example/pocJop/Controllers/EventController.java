@@ -8,12 +8,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
-import com.example.pocJop.Dto.EventCategoryCountDto;
+import com.example.pocJop.Dto.EventDtos.EventCategoryCountDto;
 import com.example.pocJop.Models.Event;
-import com.example.pocJop.Repository.EventRepository;
 import com.example.pocJop.Services.EventService;
 
 import lombok.RequiredArgsConstructor;
@@ -31,8 +27,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class EventController {
 
     private final EventService eventService;
-    private final EventRepository eventRepository;
-
     @GetMapping("/get/all")
     public ResponseEntity<List<Event>> getAllEvents() {
         return new ResponseEntity<>(eventService.getAllEvents(), HttpStatus.OK);

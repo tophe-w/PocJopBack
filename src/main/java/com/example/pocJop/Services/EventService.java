@@ -9,10 +9,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.pocJop.Dto.EventCategoryCountDto;
-import com.example.pocJop.Dto.EventDto;
+import com.example.pocJop.Dto.SiteNameDto;
+import com.example.pocJop.Dto.EventDtos.EventCategoryCountDto;
+import com.example.pocJop.Dto.EventDtos.EventDto;
+import com.example.pocJop.Dto.GareDtos.GareDto;
 import com.example.pocJop.Models.Category;
 import com.example.pocJop.Models.Event;
+import com.example.pocJop.Models.Ligne;
 import com.example.pocJop.Repository.CategoryRepository;
 import com.example.pocJop.Repository.EventRepository;
 
@@ -56,37 +59,44 @@ public class EventService {
     }
 
 
-    public List<EventCategoryCountDto> getEventsCountByCategory(Long regionId, String searchDate) {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-    LocalDateTime date = LocalDateTime.parse(searchDate, formatter);
-
-    // Récupérer la liste des événements par région et date
-    List<Event> events = eventRepository.findEventsByRegionAndDate(regionId, date);
-
-    // Grouper les événements par catégorie et compter
-    Map<String, List<EventDto>> eventsByCategory = events.stream()
-    .collect(Collectors.groupingBy(
-        event -> event.getCategory().getName(),
-        Collectors.mapping(event -> new EventDto(
-            event.getId(),
-            event.getName(),
-            event.getStartEvent(),
-            event.getEndEvent(),
-            event.getDescription(),        // Inclure la description
-            event.getNbPeopleExpected()    // Inclure le nombre de personnes attendues
-        ), Collectors.toList())  // Collecter les résultats en liste
-    ));
-
-    // Créer les DTOs
-    return eventsByCategory.entrySet().stream()
-        .map(entry -> new EventCategoryCountDto(
-                entry.getKey(), 
-                entry.getValue().size(),  // Nombre d'événements
-                entry.getValue()  // Liste des événements
-        ))
-        .collect(Collectors.toList());
-}
-
-}
     
+    public List<EventCategoryCountDto> getEventsCountByCategory(Long regionId, String searchDate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+        LocalDateTime date = LocalDateTime.parse(searchDate, formatter);
 
+        // Récupérer la liste des événements par région et date
+        List<Event> events = eventRepository.findEventsByRegionAndDate(regionId, date);
+
+        // Grouper les événements par catégorie et compter
+        Map<String, List<EventDto>> eventsByCategory = events.stream()
+                .collect(Collectors.groupingBy(
+                        event -> event.getCategory().getName(),
+                        Collectors.mapping(event -> {
+                            List<GareDto> gareDtos = event.getSite().getGares().stream()
+                                    .map(gare -> new GareDto(gare.getId(), gare.getName(), gare.getLignes().stream()
+                                            .map(Ligne::getName)
+                                            .collect(Collectors.toList())))
+                                    .collect(Collectors.toList());
+
+                            SiteNameDto siteDto = new SiteNameDto(event.getSite().getId(), event.getSite().getName());
+
+                            return new EventDto(
+                                    event.getId(),
+                                    event.getName(),
+                                    event.getStartEvent(),
+                                    event.getEndEvent(),
+                                    event.getDescription(),
+                                    event.getNbPeopleExpected(),
+                                    gareDtos,
+                                    siteDto);
+                        }, Collectors.toList())));
+
+        return eventsByCategory.entrySet().stream()
+                .map(entry -> new EventCategoryCountDto(
+                        entry.getKey(),
+                        entry.getValue().size(),
+                        entry.getValue()))
+                .collect(Collectors.toList());
+    }
+
+}

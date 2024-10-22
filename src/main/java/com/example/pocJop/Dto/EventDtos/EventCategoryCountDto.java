@@ -1,4 +1,4 @@
-package com.example.pocJop.Dto;
+package com.example.pocJop.Dto.EventDtos;
 
 
 import java.util.List;

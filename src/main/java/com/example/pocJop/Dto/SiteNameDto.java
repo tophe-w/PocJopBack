@@ -8,9 +8,13 @@ import lombok.Setter;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class LigneDto {
+public class SiteNameDto {
     private Long id;
     private String name;
-   
-    
+
+
+    public SiteNameDto(Long id ,String name) {
+        this.name = name;
+        this.id = id;
+    }
 }

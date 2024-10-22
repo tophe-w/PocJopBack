@@ -35,7 +35,6 @@ public class LigneService {
             LigneDto ligneDto = new LigneDto();
             ligneDto.setId(ligne.getId());
             ligneDto.setName(ligne.getName());
-            ligneDto.setCode(ligne.getCode());
             lignesDtos.add(ligneDto);
         }
         return lignesDtos;
