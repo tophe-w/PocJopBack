@@ -57,48 +57,7 @@ public class GareController {
         return gareService.addLignesByNameToGare(gareId, ligneNames);
     }
 
-    @PostMapping("/{gareId}/affluence/{affluenceId}")
-    public Gare addAffluenceByIdToGare(@PathVariable Long gareId, @PathVariable Long affluenceId) {
-        return gareService.addAffluenceByIdToGare(gareId, affluenceId);
-
-    }
-
-    @PostMapping("/{gareId}/capaciteDePassage/{capaciteDePassageId}")
-    public ResponseEntity<Gare> addCapaciteDePassageByIdToGare(
-            @PathVariable Long gareId,
-            @PathVariable Long capaciteDePassageId) {
-        try {
-            Gare updatedGare = gareService.addCapaciteDePassageByIdToGare(gareId, capaciteDePassageId);
-            return new ResponseEntity<>(updatedGare, HttpStatus.OK);
-        } catch (RuntimeException e) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @PostMapping("/{gareId}/capaciteArret/{capaciteArretId}")
-    public ResponseEntity<Gare> addCapaciteArretByIdToGare(
-            @PathVariable Long gareId,
-            @PathVariable Long capaciteArretId) {
-        try {
-            Gare updatedGare = gareService.addCapaciteArretByIdToGare(gareId, capaciteArretId);
-            return new ResponseEntity<>(updatedGare, HttpStatus.OK);
-        } catch (RuntimeException e) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @PostMapping("/{gareId}/troncon/{tronconId}")
-    public ResponseEntity<Gare> addTronconByIdToGare(
-            @PathVariable Long gareId,
-            @PathVariable Long tronconId) {
-
-        try {
-            Gare updatedGare = gareService.addTronconByIdToGare(gareId, tronconId);
-            return new ResponseEntity<>(updatedGare, HttpStatus.OK);
-        } catch (RuntimeException e) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        }
-    }
+  
 
     @PostMapping("/{gareId}/region/{regionId}")
     public ResponseEntity<Gare> addRegionByIdToGare(

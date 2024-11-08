@@ -35,23 +35,12 @@ public class Gare {
     @ManyToMany(mappedBy = "gares")
     @JsonIgnoreProperties("gares")
     private List<Ligne> lignes = new ArrayList<>();
-
    
-    @OneToMany(mappedBy = "gare")
-    @JsonIgnoreProperties("gare")
-    private List<CapaciteDePassage> capaciteDePassages = new ArrayList<>();
 
     @OneToMany(mappedBy = "gare")
     @JsonIgnoreProperties("gare")
-    private List<CapaciteArret> capaciteArrets = new ArrayList<>();
-
-    @OneToMany(mappedBy = "gare")
-    @JsonIgnoreProperties("gare")
-    private List<Troncon> troncons = new ArrayList<>();
-
-    @OneToOne(mappedBy = "gares")
-    @JsonIgnoreProperties("gares")
-    private Affluence affluence;
+    private List<Affluence> affluences = new ArrayList<>();
+  
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Region region;
