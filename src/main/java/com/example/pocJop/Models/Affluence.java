@@ -25,8 +25,8 @@ public class Affluence {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int estimationParisUp;
-    private int estimationParisDown;
+    private int estimationUp;
+    private int estimationDown;
     private int affluenceHabituelleUp;
     private int affluenceHabituelleDown;
 

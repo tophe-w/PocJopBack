@@ -42,9 +42,9 @@ public class AffluenceService {
         Affluence majAffluence = affluenceRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("L'affluence avec l'Id n°" + id + " n'est pas trouvée"));
        
-        if (!Objects.equals(affluence.getEstimationParisUp(), null)) {
-            majAffluence.setEstimationParisUp(affluence.getEstimationParisUp());
-            System.out.println("Mise à jour du nombre de voyageurs : " + affluence.getEstimationParisUp());
+        if (!Objects.equals(affluence.getEstimationUp(), null)) {
+            majAffluence.setEstimationUp(affluence.getEstimationUp());
+            System.out.println("Mise à jour du nombre de voyageurs : " + affluence.getEstimationUp());
         }
         if (!Objects.equals(affluence.getAffluenceHabituelleUp(), null)) {
             majAffluence.setAffluenceHabituelleUp(affluence.getAffluenceHabituelleUp());
