@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 import com.example.pocJop.Dto.SiteDto;
 import com.example.pocJop.Dto.GareDtos.GareDtoPagePrincipale;
 import com.example.pocJop.Dto.GareDtos.GareDtoSelectedGare;
-import com.example.pocJop.Models.Affluence;
 import com.example.pocJop.Models.Gare;
 import com.example.pocJop.Models.Ligne;
 import com.example.pocJop.Models.Region;

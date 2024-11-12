@@ -3,7 +3,6 @@ package com.example.pocJop.Models;
 import jakarta.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -34,7 +33,4 @@ public class DateHourForFlux {
 
     @OneToMany(mappedBy = "dateHourForFlux") 
     private List<Affluence> affluence = new ArrayList<>();
-
-   
-
 }

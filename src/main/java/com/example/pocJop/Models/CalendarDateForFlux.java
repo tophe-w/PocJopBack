@@ -22,8 +22,7 @@ public class CalendarDateForFlux {
     private Long id;
     private String date;
 
-@OneToMany(mappedBy = "calendarDateForFlux")
-private List<DateHourForFlux> dateHourForFlux = new ArrayList<>();
-
+    @OneToMany(mappedBy = "calendarDateForFlux")
+    private List<DateHourForFlux> dateHourForFlux = new ArrayList<>();
 
 }

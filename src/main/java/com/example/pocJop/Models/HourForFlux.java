@@ -22,7 +22,6 @@ public class HourForFlux {
     private Long id;
     private String hour;
 
-
     @OneToMany(mappedBy = "hourForFlux")
     private List<DateHourForFlux> dateHourForFlux = new ArrayList<>();
 
