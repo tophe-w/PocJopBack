@@ -46,7 +46,7 @@ public class GareController {
     public ResponseEntity<GareDtoSelectedGare> getSelectedGareById(@PathVariable Long id) {
         return new ResponseEntity<>(gareService.getSelectedGareById(id), HttpStatus.OK);
     }
-
+    
     @PostMapping("/create")
     public ResponseEntity<Gare> create(@RequestBody Gare gare) {
         return new ResponseEntity<>(gareService.createGare(gare), HttpStatus.CREATED);
