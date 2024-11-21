@@ -2,6 +2,7 @@ package com.example.pocJop.Controllers;
 
 import java.util.List;
 
+import com.example.pocJop.Dto.GareDtos.GareDTOb;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -38,7 +39,7 @@ public class GareController {
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Gare> getGareById(@PathVariable Long id) {
+    public ResponseEntity<GareDTOb> getGareById(@PathVariable Long id) {
         return new ResponseEntity<>(gareService.getGareById(id), HttpStatus.OK);
     }
     

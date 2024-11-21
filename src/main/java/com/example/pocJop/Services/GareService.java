@@ -5,9 +5,16 @@ import java.util.ArrayList;
 
 import java.util.List;
 
+import com.example.pocJop.Dto.AffluenceDtos.AffluenceDto;
+import com.example.pocJop.Dto.GareDtos.GareDTOb;
+import com.example.pocJop.Dto.GareDtos.GareDto;
+import com.example.pocJop.Dto.LigneDto;
+import com.example.pocJop.Dto.RegionDtos.RegionDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.example.pocJop.Dto.SiteDto;
@@ -64,9 +71,70 @@ public class GareService {
         return gareDtos;
     }
 
-    public Gare getGareById(Long id) {
-        return gareRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("La gare avec l'Id n°" + id + " is not found"));
+    public GareDTOb getGareById(Long id) {
+        //Gare gare =  gareRepository.findById(id)
+        //      .orElseThrow(() -> new RuntimeException("La gare avec l'Id n°" + id + " is not found"));
+        Optional<Gare> gareTmp = gareRepository.findById(id);
+        GareDTOb gareDto = new GareDTOb();
+
+        if(gareTmp.isPresent()) {
+            Gare gareFound =  gareTmp.get();
+
+            List<LigneDto> lignesDto = gareFound.getLignes().stream()
+                    .map(ligne -> {
+                        LigneDto ligneDto = new LigneDto();
+                        ligneDto.setId(ligne.getId());
+                        ligneDto.setName(ligne.getName());
+                        return ligneDto;
+                    })
+                    .toList();
+
+            List<AffluenceDto> affluences = gareFound.getAffluences().stream()
+                    .map(affluence -> {
+                        AffluenceDto affluenceDto = new AffluenceDto();
+                        affluenceDto.setId(affluence.getId());;
+                        affluenceDto.setEstimationUp(affluence.getEstimationUp());
+                        affluenceDto.setEstimationDown(affluence.getEstimationDown());
+                        affluenceDto.setAffluenceHabituelleUp(affluence.getAffluenceHabituelleUp());
+                        affluenceDto.setAffluenceHabituelleDown(affluence.getAffluenceHabituelleDown());
+                        return affluenceDto;
+                    })
+                    .toList();
+
+            RegionDto region = new RegionDto();
+            region.setId(gareFound.getRegion().getId());
+            region.setName(gareFound.getRegion().getName());
+
+
+            List<SiteDto> sites = gareFound.getSites().stream()
+                    .map(site -> {
+                        SiteDto siteDto = new SiteDto();
+                        siteDto.setId(site.getId());
+                        siteDto.setName(site.getName());
+                        siteDto.setDescription(site.getDescription());
+                        siteDto.setTown(site.getTown());
+                        siteDto.setCapacity(site.getCapacity());
+                        siteDto.setPhoto(site.getPhoto());
+                        return siteDto;
+                    })
+                    .toList();
+
+
+            gareDto.setId(gareFound.getId());
+            gareDto.setPlanDeGare(gareFound.getPlanDeGare());
+            gareDto.setPlanDeGareSvg(gareFound.getPlanDeGareSvg());
+            gareDto.setAccessibilite(gareFound.getAccessibilite());
+            gareDto.setCode(gareFound.getCode());
+            gareDto.setName(gareFound.getName());
+
+
+            gareDto.setLignes(lignesDto);
+            gareDto.setAffluences(affluences);
+            gareDto.setRegion(region);
+            gareDto.setSites(sites);
+        }
+
+        return gareDto;
     }
 
     public GareDtoSelectedGare getSelectedGareById(Long id) {
