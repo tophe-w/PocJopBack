@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.DeleteMapping; 
 
 import com.example.pocJop.Dto.LigneDto;
 import com.example.pocJop.Models.Ligne;
@@ -52,7 +53,7 @@ public class LigneController {
         return new ResponseEntity<>(ligneService.updateLigne(id, ligne), HttpStatus.OK);
     }
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
         ligneService.deleteLigne(id);
         return new ResponseEntity<>("La ligne avec l'Id n°" + id + " a été supprimée", HttpStatus.OK);

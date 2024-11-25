@@ -576,4 +576,4 @@ INSERT INTO date_hour_for_flux (calendar_date_for_flux_id, hour_for_flux_id) VAL
 -- INSERT INTO date_hour_for_flux (calendar_date_for_flux_id, hour_for_flux_id) VALUES (788,24);
 
 -- Affluence
-INSERT INTO affluence (estimation_up, estimation_down, affluence_habituelle_up, affluence_habituelle_down, gare_id, date_hour_for_flux_id) VALUES (250, 100, 200, 80, 1, 1;)
+INSERT INTO affluence (estimation_up, estimation_down, affluence_habituelle_up, affluence_habituelle_down, gare_id, date_hour_for_flux_id) VALUES (250, 100, 200, 80, 1, 1);

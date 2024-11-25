@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.DeleteMapping; 
 
 import com.example.pocJop.Models.HourForFlux;
 import com.example.pocJop.Services.HourForFluxService;
@@ -38,7 +39,7 @@ public class HourForFluxController {
     //     return new ResponseEntity<>(service.createDate(dateHourForFlux), HttpStatus.CREATED);
     // }
 
-    // @GetMapping("/delete/{id}")
+    // @DeleteMapping("/delete/{id}")
     // public ResponseEntity<String> delete(@PathVariable Long id) {
     //     service.deleteDate(id);
     //     return new ResponseEntity<>("La data avec l'Id n°" + id + " a été supprimée", HttpStatus.OK);
