@@ -31,7 +31,7 @@ public class EventController {
     public ResponseEntity<List<Event>> getAllEvents() {
         return new ResponseEntity<>(eventService.getAllEvents(), HttpStatus.OK);
     }
-
+ 
     @GetMapping("/get/{id}")
     public ResponseEntity<Event> getEventById(@PathVariable Long id) {
         return new ResponseEntity<>(eventService.getEventById(id), HttpStatus.OK);
@@ -49,5 +49,16 @@ public class EventController {
     
         List<EventCategoryCountDto> eventsCount = eventService.getEventsCountByCategory(regionId, searchDate);
         return ResponseEntity.ok(eventsCount);
+    }
+
+    @PostMapping("/update/{id}")
+    public ResponseEntity<Event> update(@PathVariable Long id, @RequestBody Event event) {
+        return new ResponseEntity<>(eventService.updateEvent(id, event), HttpStatus.OK);
+    }
+
+    @GetMapping("/delete/{id}")
+    public ResponseEntity<String> delete(@PathVariable Long id) {
+        eventService.deleteEvent(id);
+        return new ResponseEntity<>("L'événement avec l'Id n°" + id + " a été supprimé", HttpStatus.OK);
     }
 }

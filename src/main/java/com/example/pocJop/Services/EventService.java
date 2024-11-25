@@ -99,4 +99,44 @@ public class EventService {
                 .collect(Collectors.toList());
     }
 
+    public Event updateEvent(Long id, Event event) {
+        Event majEvent = eventRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("L'événement avec l'Id n°" + id + " n'est pas trouvé"));
+   
+        if (event.getName() != null) {
+            majEvent.setName(event.getName());
+            System.out.println("Mise à jour de la date de début de l'événement : " + event.getStartEvent());
+        }
+        if (event.getStartEvent() != null) {
+                majEvent.setStartEvent(event.getStartEvent());
+                System.out.println("Mise à jour de la date de début de l'événement : " + event.getStartEvent());
+            }
+        if (event.getEndEvent() != null) {
+            majEvent.setEndEvent(event.getEndEvent());
+            System.out.println("Mise à jour de la date de fin de l'événement : " + event.getEndEvent());
+        }
+        if (event.getDescription() != null) {
+            majEvent.setDescription(event.getDescription());
+            System.out.println("Mise à jour de la description de l'événement : " + event.getDescription());
+        }
+        if (event.getNbPeopleExpected() > 0) {
+            majEvent.setNbPeopleExpected(event.getNbPeopleExpected());
+            System.out.println("Mise à jour du nombre de personnes attendues à l'événement : " + event.getNbPeopleExpected());
+        }
+
+       
+   
+        System.out.println("MajEvent avant sauvegarde : " + majEvent);
+        return eventRepository.save(majEvent);
+    }
+   
+
+
+
+        public void deleteEvent(Long id) {
+                eventRepository.deleteById(id);
+        }
+
+
+
 }

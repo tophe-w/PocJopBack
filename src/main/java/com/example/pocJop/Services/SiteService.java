@@ -97,6 +97,35 @@ public class SiteService {
         return site;
     }
 
+    public Site updateSite(Long id, Site site) {
+        Site majSite = siteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Le site avec l'Id n°" + id + " n'est pas trouvé"));
+
+        if (site.getName() != null) {
+            majSite.setName(site.getName());
+        }
+        if (site.getTown() != null) {
+            majSite.setTown(site.getTown());
+        }
+        if (site.getDescription() != null) {
+            majSite.setDescription(site.getDescription());
+        }
+        if (site.getCapacity() > 0) {
+            majSite.setCapacity(site.getCapacity());
+        }
+        if (site.getPhoto() != null) {
+            majSite.setPhoto(site.getPhoto());
+        }
+        if (site.getPlanDeSite() != null) {
+            majSite.setPlanDeSite(site.getPlanDeSite());
+        }
+        if (site.getAddress() != null) {
+            majSite.setAddress(site.getAddress());
+        }
+
+        return siteRepository.save(majSite);
+    }
+
     public void deleteSite(Long id) {
         siteRepository.deleteById(id);
     }

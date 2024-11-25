@@ -55,4 +55,15 @@ public class SiteController {
         return siteService.addEventByIdToSite(siteId, eventId);
     }
 
+    @PostMapping("/update/{id}")
+    public ResponseEntity<Site> update(@PathVariable Long id, @RequestBody Site site) {
+        return new ResponseEntity<>(siteService.updateSite(id, site), HttpStatus.OK);
+    }
+
+    @GetMapping("/delete/{id}")
+    public ResponseEntity<String> delete(@PathVariable Long id) {
+        siteService.deleteSite(id);
+        return new ResponseEntity<>("Le site avec l'Id n°" + id + " a été supprimé", HttpStatus.OK);
+    }
+
 }
