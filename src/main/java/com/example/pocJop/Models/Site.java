@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -38,8 +39,8 @@ public class Site {
     @JsonIgnoreProperties("site")
     private List<Gare> gares = new ArrayList<>();
 
-    @OneToMany(mappedBy = "site")
-    @JsonIgnoreProperties("site")
+    @OneToMany(mappedBy = "site", cascade = CascadeType.ALL)
+    // @JsonIgnoreProperties("site")
     private List<Event> events = new ArrayList<>();
 
 }

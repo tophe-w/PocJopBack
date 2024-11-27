@@ -2,8 +2,6 @@ package com.example.pocJop.Dto.GareDtos;
 
 import java.util.List;
 
-import com.example.pocJop.Dto.LigneDto;
-
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;

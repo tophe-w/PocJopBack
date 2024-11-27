@@ -3,6 +3,7 @@ package com.example.pocJop.Models;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,7 +23,7 @@ public class HourForFlux {
     private Long id;
     private String hour;
 
-    @OneToMany(mappedBy = "hourForFlux")
+    @OneToMany(mappedBy = "hourForFlux", cascade = CascadeType.ALL)
     private List<DateHourForFlux> dateHourForFlux = new ArrayList<>();
 
 }

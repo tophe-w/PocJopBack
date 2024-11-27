@@ -7,7 +7,6 @@ import java.util.List;
 
 import com.example.pocJop.Dto.AffluenceDtos.AffluenceDto;
 import com.example.pocJop.Dto.GareDtos.GareDTOb;
-import com.example.pocJop.Dto.GareDtos.GareDto;
 import com.example.pocJop.Dto.LigneDto;
 import com.example.pocJop.Dto.RegionDtos.RegionDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,6 @@ import com.example.pocJop.Dto.GareDtos.GareDtoSelectedGare;
 import com.example.pocJop.Models.Gare;
 import com.example.pocJop.Models.Ligne;
 import com.example.pocJop.Models.Region;
-import com.example.pocJop.Repository.AffluenceRepository;
 import com.example.pocJop.Repository.GareRepository;
 import com.example.pocJop.Repository.LigneRepository;
 import com.example.pocJop.Repository.RegionRepository;
@@ -38,10 +36,6 @@ public class GareService {
 
     @Autowired
     private LigneRepository ligneRepository;
-
-
-    @Autowired
-    private AffluenceRepository affluenceRepository;
 
     @Autowired
     private RegionRepository regionRepository;

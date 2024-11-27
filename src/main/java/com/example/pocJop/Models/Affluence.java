@@ -1,7 +1,7 @@
 package com.example.pocJop.Models;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,11 +25,11 @@ public class Affluence {
     private int affluenceHabituelleDown;
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "gare_id")
     private Gare gare;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "date_hour_for_flux_id")
     private DateHourForFlux dateHourForFlux;
 

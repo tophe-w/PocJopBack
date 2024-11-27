@@ -3,11 +3,13 @@ package com.example.pocJop.Models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.time.LocalDateTime;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,12 +29,14 @@ public class Event {
     private String description;
     private int nbPeopleExpected;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JsonIgnoreProperties("events")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "site_id")
+    // @JsonIgnoreProperties("events")
     private Site site;
 
     
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JsonIgnoreProperties("events")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "category_id")
+    // @JsonIgnoreProperties("events")
     private Category category;
 }
