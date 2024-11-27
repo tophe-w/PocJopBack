@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 import com.example.pocJop.Models.Affluence;
 import com.example.pocJop.Services.AffluenceService;
@@ -41,7 +42,7 @@ public class AffluenceController {
         return new ResponseEntity<>(affluenceService.createAffluence(affluence), HttpStatus.CREATED);
     }
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
         affluenceService.deleteAffluence(id);
         return new ResponseEntity<>("L'affluence avec l'Id n°" + id + " a été supprimée", HttpStatus.OK);

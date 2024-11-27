@@ -18,6 +18,7 @@ import com.example.pocJop.Services.GareService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.DeleteMapping; 
 
 @RequiredArgsConstructor
 @RestController
@@ -77,7 +78,7 @@ public class GareController {
         return new ResponseEntity<>(gareService.updateGare(id, gare), HttpStatus.OK);
     }
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
         gareService.deleteGare(id);
         return new ResponseEntity<>("La gare avec l'Id n°" + id + " a été supprimée", HttpStatus.OK);

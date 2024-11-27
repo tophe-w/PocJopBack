@@ -41,7 +41,7 @@ public class EventService {
 
     public Event getEventById(Long id) {
         return eventRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("There is no category"));
+                .orElseThrow(() -> new RuntimeException("There is no event"));
     }
 
     public Event createEvent(Event event) {
@@ -53,7 +53,7 @@ public class EventService {
                 .orElseThrow(() -> new RuntimeException("L'événement avec l'Id n°" + eventId + " n'est pas trouvé"));
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(
-                        () -> new RuntimeException("La catégorie avec l'Id n°" + categoryId + " n'est pas trouvée"));
+                        () -> new RuntimeException("L'événement avec l'Id n°" + categoryId + " n'est pas trouvée"));
         event.setCategory(category);
         return eventRepository.save(event);
     }
@@ -125,8 +125,7 @@ public class EventService {
         }
 
        
-   
-        System.out.println("MajEvent avant sauvegarde : " + majEvent);
+
         return eventRepository.save(majEvent);
     }
    

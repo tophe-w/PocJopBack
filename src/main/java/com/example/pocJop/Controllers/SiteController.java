@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.DeleteMapping; 
 
 @RequiredArgsConstructor
 @RestController
@@ -60,8 +61,8 @@ public class SiteController {
         return new ResponseEntity<>(siteService.updateSite(id, site), HttpStatus.OK);
     }
 
-    @GetMapping("/delete/{id}")
-    public ResponseEntity<String> delete(@PathVariable Long id) {
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
         siteService.deleteSite(id);
         return new ResponseEntity<>("Le site avec l'Id n°" + id + " a été supprimé", HttpStatus.OK);
     }
