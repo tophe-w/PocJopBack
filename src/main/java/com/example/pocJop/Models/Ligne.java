@@ -13,9 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @RequiredArgsConstructor
@@ -30,11 +28,5 @@ public class Ligne {
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "ligne_gare", joinColumns = @JoinColumn(name = "ligne_id"), inverseJoinColumns = @JoinColumn(name = "gare_id"))
-    @JsonIgnoreProperties("lignes")  
     private List<Gare> gares = new ArrayList<>();
-
-    // @ManyToMany
-    // @JoinTable(name = "ligne_olympicSite", joinColumns = @JoinColumn(name = "ligne_id"), inverseJoinColumns = @JoinColumn(name = "olympicSite_id"))
-    // @JsonIgnoreProperties("lignes")
-    // private List<OlympicSite> olympicSites = new ArrayList<>();
 }

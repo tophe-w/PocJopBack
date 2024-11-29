@@ -1,10 +1,6 @@
 package com.example.pocJop.Models;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -16,9 +12,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @RequiredArgsConstructor
@@ -34,15 +28,13 @@ public class Gare {
     private String planDeGareSvg;
     private String accessibilite;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "ligne_gare", joinColumns = @JoinColumn(name = "gare_id"), inverseJoinColumns = @JoinColumn(name = "ligne_id"))
-    @JsonIgnoreProperties("gares")
-    private List<Ligne> lignes = new ArrayList<>();
+    private List<Ligne> lignes;
    
 
-    @OneToMany(mappedBy = "gare")
-    @JsonIgnoreProperties("gare")
-    private List<Affluence> affluences = new ArrayList<>();
+    @OneToMany(mappedBy = "gare", cascade = { CascadeType.PERSIST, CascadeType.ALL })
+    private List<Affluence> affluences;
   
 
     @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
@@ -51,7 +43,6 @@ public class Gare {
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "site_gare", joinColumns = @JoinColumn(name = "gare_id"), inverseJoinColumns = @JoinColumn(name = "site_id"))
-    @JsonIgnoreProperties("gares")
-    private List<Site> sites = new ArrayList<>();
+    private List<Site> sites;
 
 }

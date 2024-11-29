@@ -7,9 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @RequiredArgsConstructor
@@ -32,8 +30,6 @@ public class Affluence {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "date_hour_for_flux_id")
     private DateHourForFlux dateHourForFlux;
-
-    
    
 }
 

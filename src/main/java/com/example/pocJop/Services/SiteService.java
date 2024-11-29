@@ -1,20 +1,21 @@
 package com.example.pocJop.Services;
 
 import java.util.List;
+import java.util.Optional;
 
+import com.example.pocJop.Dto.siteDtos.SiteDtoMapper;
+import com.example.pocJop.helper.Helpers;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.pocJop.Dto.SiteDto;
-import com.example.pocJop.Models.Event;
-import com.example.pocJop.Models.Gare;
+import com.example.pocJop.Dto.siteDtos.SiteDto;
 import com.example.pocJop.Models.Site;
-import com.example.pocJop.Repository.EventRepository;
-import com.example.pocJop.Repository.GareRepository;
 import com.example.pocJop.Repository.SiteRepository;
 
 import lombok.RequiredArgsConstructor;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class SiteService {
@@ -23,113 +24,36 @@ public class SiteService {
     private SiteRepository siteRepository;
 
     @Autowired
-    private GareRepository gareRepository;
+    private SiteDtoMapper siteDtoMapper;
 
-    @Autowired
-    private EventRepository eventRepository;
-
-    public List<Site> getAllSitesEvents() {
+    public List<SiteDto> getAllSitesEvents() {
         List<Site> sites = siteRepository.findAll();
         if (sites.isEmpty()) {
-            throw new RuntimeException("There is no region");
+            throw new RuntimeException("There ara no sites");
         }
-        return sites;
+        return sites.stream().map(siteDtoMapper::from).toList();
     }
 
-    public Site getSiteById(Long id) {
+    public Optional<SiteDto> getSiteById(Long id) {
+
         return siteRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Site not found with id: " + id));
-    }
-
-    public SiteDto getSiteDtoById(Long id) {
-        Site site = siteRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Site not found with id: " + id));
-        SiteDto siteDto = new SiteDto();
-        siteDto.setId(site.getId());
-        siteDto.setName(site.getName());
-        siteDto.setTown(site.getTown());
-        siteDto.setDescription(site.getDescription());
-        siteDto.setCapacity(site.getCapacity());
-        siteDto.setPhoto(site.getPhoto());
-        siteDto.setPlanDeSite(site.getPlanDeSite());
-        siteDto.setAddress(site.getAddress());
-        return siteDto;
-        
+                .map(this.siteDtoMapper::from);
     }
 
     public Site createSite(Site site) {
         return siteRepository.save(site);
     }
 
-    public Site addGareByIdToSite(Long siteId, List<Long> gareIds) {
-        Site site = siteRepository.findById(siteId)
-                .orElseThrow(
-                        () -> new RuntimeException("Le site avec l'id n°" + siteId + "n'est pas trouvé"));
-        List<Gare> gares = gareRepository.findByIdIn(gareIds);
-        if (gares.isEmpty()) {
-            throw new RuntimeException("Aucun site olympique trouvé avec les IDs fournis : " + gareIds);
-        }
-        site.getGares().addAll(gares);
-
-        for (Gare gare : gares) {
-            if (!gare.getSites().contains(site)) {
-                gare.getSites().add(site);
-            }
-        }
-        siteRepository.save(site);
-        gareRepository.saveAll(gares);
-
-        return site;
-    }
-
-    public Site addEventByIdToSite(Long siteId, Long eventId) {
-        Site site = siteRepository.findById(siteId)
-                .orElseThrow(
-                        () -> new RuntimeException("Le site avec l'id n°" + siteId + " n'est pas trouvé"));
-
-        Event event = eventRepository.findById(eventId)
-                .orElseThrow(() -> new RuntimeException("L'événement avec l'Id n°" + eventId + " n'est pas trouvé"));
-
-        event.setSite(site);
-
-        eventRepository.save(event);
-
-        return site;
-    }
-
     public Site updateSite(Long id, Site site) {
-        Site majSite = siteRepository.findById(id)
+        Site siteToUpdate = siteRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Le site avec l'Id n°" + id + " n'est pas trouvé"));
 
-        if (site.getName() != null) {
-            majSite.setName(site.getName());
-        }
-        if (site.getTown() != null) {
-            majSite.setTown(site.getTown());
-        }
-        if (site.getDescription() != null) {
-            majSite.setDescription(site.getDescription());
-        }
-        if (site.getCapacity() > 0) {
-            majSite.setCapacity(site.getCapacity());
-        }
-        if (site.getPhoto() != null) {
-            majSite.setPhoto(site.getPhoto());
-        }
-        if (site.getPlanDeSite() != null) {
-            majSite.setPlanDeSite(site.getPlanDeSite());
-        }
-        if (site.getAddress() != null) {
-            majSite.setAddress(site.getAddress());
-        }
+        Helpers.UpdateObjectFields(site, siteToUpdate);
 
-        return siteRepository.save(majSite);
+        return siteRepository.save(siteToUpdate);
     }
 
     public void deleteSite(Long id) {
         siteRepository.deleteById(id);
     }
-
-   
-
 }

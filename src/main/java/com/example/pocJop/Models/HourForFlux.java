@@ -3,14 +3,8 @@ package com.example.pocJop.Models;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Getter
@@ -22,7 +16,7 @@ public class HourForFlux {
     private Long id;
     private String hour;
 
-    @OneToMany(mappedBy = "hourForFlux")
+    @OneToMany(mappedBy = "hourForFlux", cascade = { CascadeType.PERSIST, CascadeType.ALL })
     private List<DateHourForFlux> dateHourForFlux = new ArrayList<>();
 
 }

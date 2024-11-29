@@ -15,6 +15,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.CascadeType;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -23,6 +24,7 @@ import lombok.Setter;
 @RequiredArgsConstructor
 @Getter
 @Setter
+@AllArgsConstructor
 public class Site {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,11 +39,13 @@ public class Site {
 
     @ManyToMany
     @JoinTable(name = "site_gare", joinColumns = @JoinColumn(name = "site_id"), inverseJoinColumns = @JoinColumn(name = "gare_id"))
-    @JsonIgnoreProperties("site")
+    //@JsonIgnoreProperties("site")
     private List<Gare> gares = new ArrayList<>();
 
-    @OneToMany(mappedBy = "site")
-    @JsonIgnoreProperties("site")
+    @OneToMany(mappedBy = "site",
+            cascade = { CascadeType.PERSIST, CascadeType.ALL })
+
+    //@JsonIgnoreProperties("site")
     private List<Event> events = new ArrayList<>();
 
 }
