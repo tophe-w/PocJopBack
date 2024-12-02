@@ -3,6 +3,7 @@ package com.example.pocJop.Dto.gareDtos;
 import com.example.pocJop.Dto.affluenceDtos.AffluenceDto;
 import com.example.pocJop.Dto.ligneDtos.LigneDto;
 import com.example.pocJop.Dto.UnidirectionalMapper;
+import com.example.pocJop.Dto.regionDtos.RegionDto;
 import com.example.pocJop.Models.Gare;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -27,6 +28,7 @@ public class GareDtoMapper implements UnidirectionalMapper<GareDto, Gare> {
                             .estimationDown(affluence.getEstimationDown())
                             .build()).collect(Collectors.toList()))
                     .code(input.getCode())
+                    .region(RegionDto.builder().id(input.getRegion().getId()).name(input.getRegion().getName()).build())
                     .planDeGare(input.getPlanDeGare())
                     .planDeGareSvg(input.getPlanDeGareSvg())
                     .accessibilite(input.getAccessibilite())
