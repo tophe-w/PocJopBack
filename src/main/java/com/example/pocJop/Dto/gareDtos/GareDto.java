@@ -12,7 +12,7 @@ import lombok.*;
 
 @Getter
 @Setter
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @AllArgsConstructor

@@ -35,6 +35,7 @@ public class EventController {
     private final static String ENDPOINT_EVENT_CREATE = EVENT_BASE_PATH + "/create";
     private final static String ENDPOINT_EVENT_UPDATE = EVENT_BASE_PATH + "/update/{id}";
     private final static String ENDPOINT_EVENT_DELETE = EVENT_BASE_PATH + "/delete/{id}";
+    private final static String ENDPOINT_EVENT_GET_BY_GARE = EVENT_BASE_PATH + "/get/gare/{gareId}";
 
     private final EventService eventService;
 
@@ -51,6 +52,12 @@ public class EventController {
         Optional<EventDto> eventDto= eventService.getById(id);
         return eventDto.map(dto -> new ResponseEntity<>(dto, HttpStatus.OK)).orElseThrow(() -> new ResourceNotFoundException(msg.getMessage("error_msg.event_not_found", Long.toString(id))));
     }
+
+    @GetMapping(ENDPOINT_EVENT_GET_BY_GARE)
+    public ResponseEntity<List<EventDto>> getAllEventsForGare(@PathVariable Long gareId) {
+        return new ResponseEntity<>(eventService.getAllEventsForGare(gareId), HttpStatus.OK);
+    }
+
     @PostMapping(ENDPOINT_EVENT_CREATE)
     public ResponseEntity<Event> create(@RequestBody Event event) {
         return new ResponseEntity<>(eventService.createEvent(event), HttpStatus.CREATED);

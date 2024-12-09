@@ -1,18 +1,14 @@
 package com.example.pocJop.Models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
 @RequiredArgsConstructor
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
 public class Affluence {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,14 +18,11 @@ public class Affluence {
     private int affluenceHabituelleUp;
     private int affluenceHabituelleDown;
 
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "gare_id")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Gare gare;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "date_hour_for_flux_id")
-    private DateHourForFlux dateHourForFlux;
-   
+    @ManyToOne(fetch = FetchType.LAZY)
+    private DateCalendar dateCalendar;
+
 }
 

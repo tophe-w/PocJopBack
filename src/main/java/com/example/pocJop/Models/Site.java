@@ -3,8 +3,6 @@ package com.example.pocJop.Models;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,16 +13,14 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.CascadeType;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @RequiredArgsConstructor
 @Getter
 @Setter
 @AllArgsConstructor
+@Builder
 public class Site {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,14 +34,12 @@ public class Site {
     private String address; 
 
     @ManyToMany
-    @JoinTable(name = "site_gare", joinColumns = @JoinColumn(name = "site_id"), inverseJoinColumns = @JoinColumn(name = "gare_id"))
-    //@JsonIgnoreProperties("site")
+    @JoinTable(name = "site_gare", joinColumns = @JoinColumn(name = "site_id"),
+            inverseJoinColumns = @JoinColumn(name = "gare_id"))
     private List<Gare> gares = new ArrayList<>();
 
     @OneToMany(mappedBy = "site",
-            cascade = { CascadeType.PERSIST, CascadeType.ALL })
-
-    //@JsonIgnoreProperties("site")
+            cascade = { CascadeType.MERGE, CascadeType.REFRESH })
     private List<Event> events = new ArrayList<>();
 
 }

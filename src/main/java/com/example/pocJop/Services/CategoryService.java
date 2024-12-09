@@ -8,7 +8,6 @@ import com.example.pocJop.Dto.categoryDtos.CategoryDto;
 import com.example.pocJop.Dto.categoryDtos.CategoryDtoMapper;
 import com.example.pocJop.helper.Helpers;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.pocJop.Models.Category;
@@ -21,8 +20,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class CategoryService {
 
-    @Autowired
-    private CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
     private final CategoryDtoMapper categoryDtoMapper;
 
@@ -39,7 +37,6 @@ public class CategoryService {
     
     public Optional<CategoryDto> getCategoryById(Long id) {
         return categoryRepository.findById(id).map(categoryDtoMapper::from);
-                //.orElseThrow(() -> new RuntimeException("Category not found with id: " + id));
     }
     
     public Category createCategory(Category category) {

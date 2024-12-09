@@ -2,10 +2,6 @@ package com.example.pocJop.Models;
 
 import java.util.ArrayList;
 import java.util.List;
-
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,7 +17,6 @@ public class Category {
     private String name;
 
     @OneToMany(mappedBy = "category", cascade = { CascadeType.PERSIST, CascadeType.ALL })
-    //@JsonIgnoreProperties("category")
     private List<Event> events = new ArrayList<>();
 
 }
