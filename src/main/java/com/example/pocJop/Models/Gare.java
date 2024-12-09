@@ -37,7 +37,7 @@ public class Gare {
     private List<Affluence> affluences;
   
 
-    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "region_id")
     private Region region;
 
