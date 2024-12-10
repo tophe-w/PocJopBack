@@ -4,9 +4,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import com.example.pocJop.Dto.eventDtos.EventDtoMapper;
+import com.example.pocJop.Models.Gare;
+import com.example.pocJop.Repository.GareRepository;
 import com.example.pocJop.helper.Helpers;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.pocJop.Dto.eventDtos.EventDto;
 import com.example.pocJop.Models.Event;
@@ -19,8 +20,9 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class EventService {
 
-    @Autowired
-    private EventRepository eventRepository;
+    private final EventRepository eventRepository;
+
+    private final GareRepository gareRepository;
 
     private final EventDtoMapper eventDtoMapper;
 
@@ -30,6 +32,13 @@ public class EventService {
             throw new RuntimeException("There is no event");
         }
         return events;
+    }
+
+    public List<EventDto> getAllEventsForGare(Long gareId) {
+
+        Gare gare = gareRepository.findById(gareId).orElseThrow(() -> new RuntimeException("La gare avec l'Id n°" + gareId + " n'est pas trouvée"));
+
+        return gare.getSites().stream().flatMap(site -> site.getEvents().stream()).map(this.eventDtoMapper::from).toList();
     }
 
     public Optional<EventDto> getById(Long id) {

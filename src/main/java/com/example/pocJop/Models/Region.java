@@ -3,8 +3,6 @@ package com.example.pocJop.Models;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,14 +10,15 @@ import lombok.*;
 @RequiredArgsConstructor
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
 public class Region {
      @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "region", cascade = { CascadeType.PERSIST, CascadeType.ALL })
-     @JsonIgnoreProperties("region")
+    @OneToMany(mappedBy = "region", cascade = { CascadeType.MERGE, CascadeType.REFRESH })
     private List<Gare> gares = new ArrayList<>();
     
 }

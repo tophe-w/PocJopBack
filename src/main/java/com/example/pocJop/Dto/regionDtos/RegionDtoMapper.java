@@ -10,12 +10,12 @@ import org.springframework.stereotype.Component;
 public class RegionDtoMapper implements UnidirectionalMapper<RegionDto, Region> {
     @Override
     public RegionDto from(Region input) {
+
         return RegionDto.builder()
                 .id(input.getId())
                 .name(input.getName())
                 .nbGares(input.getGares().size())
                 .nbLieux(input.getGares().stream().map(gare -> gare.getSites().size()).reduce(0, Integer::sum))
-
                 .build();
     }
 }

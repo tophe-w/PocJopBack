@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import com.example.pocJop.helper.Helpers;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.pocJop.Dto.ligneDtos.LigneDto;
@@ -20,8 +19,7 @@ import lombok.RequiredArgsConstructor;
 public class LigneService {
     
 
-    @Autowired
-    private LigneRepository ligneRepository;
+    private final LigneRepository ligneRepository;
 
 
     public List<LigneDto> getAll() {
@@ -30,12 +28,11 @@ public class LigneService {
             throw new RuntimeException("There is no ligne");
         }
 
-        return lignes.stream().map(ligne -> {
-            return LigneDto.builder()
+        return lignes.stream().map(ligne ->
+            LigneDto.builder()
                     .id(ligne.getId())
                     .name(ligne.getName())
-                    .build();
-        }).toList();
+                    .build()).toList();
     }
 
     public Optional<LigneDto> getById(Long id) {
@@ -43,7 +40,6 @@ public class LigneService {
                 .id(ligne.getId())
                 .name(ligne.getName())
                 .build());
-                //.orElseThrow(() -> new RuntimeException("La ligne avec l'Id n°" + id + " is not found"));
     }
 
     public Ligne createLigne(Ligne ligne) {

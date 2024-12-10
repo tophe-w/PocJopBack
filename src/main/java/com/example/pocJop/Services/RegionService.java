@@ -17,11 +17,9 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class RegionService {
 
-    @Autowired
-    private RegionRepository regionRepository;
+    private final RegionRepository regionRepository;
 
-    @Autowired
-    private RegionDtoMapper regionDtoMapper;
+    private final RegionDtoMapper regionDtoMapper;
 
 
     public List<RegionDto> getAll() {

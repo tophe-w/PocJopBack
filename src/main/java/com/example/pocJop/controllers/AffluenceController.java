@@ -2,6 +2,7 @@ package com.example.pocJop.controllers;
 
 import java.util.List;
 
+import com.example.pocJop.Dto.affluenceDtos.AffluenceDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +32,9 @@ public class AffluenceController {
     private final static String ENDPOINT_AFFLUENCE_CREATE = AFFLUENCE_BASE_PATH + "/create";
     private final static String ENDPOINT_AFFLUENCE_UPDATE = AFFLUENCE_BASE_PATH + "/update/{id}";
     private final static String ENDPOINT_AFFLUENCE_DELETE = AFFLUENCE_BASE_PATH + "/delete/{id}";
+    private final static String ENDPOINT_AFFLUENCE_FOR_GARE = AFFLUENCE_BASE_PATH + "/get/gare/{gareId}";
+    private final static String ENDPOINT_AFFLUENCE_FOR_GARE_BETWEEN_DATE = AFFLUENCE_BASE_PATH + "/get/gare/{gareId}/{startDate}/{endDate}";
+    private final static String ENDPOINT_AFFLUENCE_FOR_GARE_AT_DATE = AFFLUENCE_BASE_PATH + "/get/gare/{gareId}/{date}";
 
     private final static String RESSOURCE_DELETED_MSG = "L'affluence avec l'Id n° %s a été supprimée";
 
@@ -44,13 +48,13 @@ public class AffluenceController {
 
 
     @GetMapping(ENDPOINT_AFFLUENCE_GET_BY_ID)
-    public ResponseEntity<Affluence> getById(@PathVariable Long id) {
+    public ResponseEntity<AffluenceDto> getById(@PathVariable Long id) {
         return new ResponseEntity<>(affluenceService.getById(id), HttpStatus.OK);
     }
 
     @PostMapping(ENDPOINT_AFFLUENCE_CREATE)
-    public ResponseEntity<Affluence> create(@RequestBody Affluence affluence) {
-        return new ResponseEntity<>(affluenceService.create(affluence), HttpStatus.CREATED);
+    public ResponseEntity<Affluence> create(@RequestBody AffluenceDto affluenceDto) {
+        return new ResponseEntity<>(affluenceService.create(affluenceDto), HttpStatus.CREATED);
     }
 
     @DeleteMapping(ENDPOINT_AFFLUENCE_DELETE)
@@ -60,8 +64,24 @@ public class AffluenceController {
     }
 
     @PostMapping(ENDPOINT_AFFLUENCE_UPDATE)
-    public ResponseEntity<Affluence> update(@PathVariable Long id, @RequestBody Affluence affluence) {
+    public ResponseEntity<AffluenceDto> update(@PathVariable Long id, @RequestBody Affluence affluence) {
         return new ResponseEntity<>(affluenceService.update(id, affluence), HttpStatus.OK);
     }
+
+    @GetMapping(ENDPOINT_AFFLUENCE_FOR_GARE)
+    public ResponseEntity<List<AffluenceDto>> getAffluencesForGare(@PathVariable Long gareId) {
+        return new ResponseEntity<>(affluenceService.getAffluencesForGare(gareId), HttpStatus.OK);
+    }
+
+    @GetMapping(ENDPOINT_AFFLUENCE_FOR_GARE_BETWEEN_DATE)
+    public ResponseEntity<List<AffluenceDto>> getAffluencesForGareBetweenDates(@PathVariable Long gareId, @PathVariable String startDate, @PathVariable String endDate) {
+        return new ResponseEntity<>(affluenceService.getGareAffluencesBetwenDates(gareId, startDate, endDate), HttpStatus.OK);
+    }
+
+    @GetMapping(ENDPOINT_AFFLUENCE_FOR_GARE_AT_DATE)
+    public ResponseEntity<AffluenceDto> getAffluencesForGareAtDate(@PathVariable Long gareId, @PathVariable String date) {
+        return new ResponseEntity<>(affluenceService.getGareAffluencesAtDate(gareId, date), HttpStatus.OK);
+    }
+
 
 }

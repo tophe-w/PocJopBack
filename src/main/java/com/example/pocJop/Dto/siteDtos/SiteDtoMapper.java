@@ -1,6 +1,5 @@
 package com.example.pocJop.Dto.siteDtos;
 import com.example.pocJop.Dto.eventDtos.EventDto;
-import com.example.pocJop.Dto.gareDtos.GareDto;
 import com.example.pocJop.Dto.UnidirectionalMapper;
 import com.example.pocJop.Models.Site;
 import lombok.extern.slf4j.Slf4j;
@@ -20,10 +19,6 @@ public class SiteDtoMapper implements UnidirectionalMapper<SiteDto, Site> {
                 .planDeSite(input.getPlanDeSite())
                 .address(input.getAddress())
                 .id(input.getId())
-                .gares(input.getGares().stream().map(gare -> GareDto.builder()
-                        .id(gare.getId())
-                        .name(gare.getName())
-                        .build()).toList())
                 .events(input.getEvents().stream().map(event -> EventDto.builder()
                         .id(event.getId())
                         .name(event.getName())
