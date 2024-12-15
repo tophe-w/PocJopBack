@@ -11,6 +11,7 @@ import com.example.pocJop.Models.*;
 import com.example.pocJop.Services.*;
 import com.example.pocJop.exceptions.customException.ResourceNotFoundException;
 import com.example.pocJop.helper.Messages;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -56,10 +57,18 @@ public class GareController {
         Optional<GareDto> gareDto = gareService.getGareById(id);
         return gareDto.map(dto -> new ResponseEntity<>(dto, HttpStatus.OK)).orElseThrow(() -> new ResourceNotFoundException(msg.getMessage("error_msg.gare_not_found", Long.toString(id))));
     }
-    
-    @PostMapping(path = ENDPOINT_GARE_CREATE, consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
-    public ResponseEntity<GareDto> create(@RequestPart("gare") GareDto gareDto, @RequestPart("file") MultipartFile file) {
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping(path = ENDPOINT_GARE_CREATE, consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+    public ResponseEntity<GareDto> create(@RequestPart("gare") String gareDtoR, @RequestPart("file") MultipartFile file) {
+        GareDto gareDto = null;
+        try {
+            gareDto = new ObjectMapper().readValue(gareDtoR, GareDto.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+           //.readValue(gareDtoR, GareDto.class);
+        assert gareDto != null;
         List<Ligne> listLignes = gareDto.getLignes() != null ?gareDto.getLignes().stream().map(ligneDto -> {
             LigneDto ligne = ligneService.getById(ligneDto.getId())
                     .orElseThrow(() -> new ResourceNotFoundException(
