@@ -1,6 +1,10 @@
 package com.example.pocJop.Models;
 
 import java.time.LocalDateTime;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -24,6 +28,7 @@ public class Event {
     private int nbPeopleExpected;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Site site;
 
     
