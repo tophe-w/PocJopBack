@@ -50,8 +50,8 @@ public class SiteService {
 
     public Site createSite(Site site, List<MultipartFile> photo, MultipartFile plan) {
 
-        Path uploadPathPlan = Paths.get(uploadDir + SITE_PLAN_UPLOAD_PATH +site.getName() + "/");
-        Path uploadPathPhoto = Paths.get(uploadDir + SITE_PHOTO_UPLOAD_PATH +site.getName() + "/");
+        Path uploadPathPlan = Paths.get(uploadDir + SITE_PLAN_UPLOAD_PATH +site.getName().replace(" ","_") + "/");
+        Path uploadPathPhoto = Paths.get(uploadDir + SITE_PHOTO_UPLOAD_PATH +site.getName().replace(" ","_") + "/");
         String filePathPlan = Helpers.pathSavedFile(plan, uploadPathPlan);
 
         List<String> filePathsPhoto = new ArrayList<>();
@@ -60,14 +60,14 @@ public class SiteService {
             for (MultipartFile file : photo) {
                 String filePathPhoto = Helpers.pathSavedFile(file, uploadPathPhoto);
                 if (filePathPhoto != null) {
-                    String filePhoto = uploadDir + SITE_PHOTO_UPLOAD_PATH +site.getName() + "/" + file.getOriginalFilename();
+                    String filePhoto = uploadDir + SITE_PHOTO_UPLOAD_PATH +site.getName().replace(" ","_") + "/" + file.getOriginalFilename();
                     filePathsPhoto.add(filePhoto);
                 } else {
                     return null;
                 }
             }
-            String filePlan = uploadDir + SITE_PLAN_UPLOAD_PATH +site.getName() + "/" + plan.getOriginalFilename();
-            site.setPlanDeSite(filePathPlan);
+            String filePlan = uploadDir + SITE_PLAN_UPLOAD_PATH +site.getName().replace(" ","_") + "/" + plan.getOriginalFilename();
+            site.setPlanDeSite(filePlan);
             site.setPhoto(String.join(" ; ", filePathsPhoto));
         } else {
             return null;
