@@ -60,11 +60,13 @@ public class SiteService {
             for (MultipartFile file : photo) {
                 String filePathPhoto = Helpers.pathSavedFile(file, uploadPathPhoto);
                 if (filePathPhoto != null) {
-                    filePathsPhoto.add(filePathPhoto);
+                    String filePhoto = uploadDir + SITE_PHOTO_UPLOAD_PATH +site.getName() + "/" + file.getOriginalFilename();
+                    filePathsPhoto.add(filePhoto);
                 } else {
                     return null;
-            }
                 }
+            }
+            String filePlan = uploadDir + SITE_PLAN_UPLOAD_PATH +site.getName() + "/" + plan.getOriginalFilename();
             site.setPlanDeSite(filePathPlan);
             site.setPhoto(String.join(" ; ", filePathsPhoto));
         } else {

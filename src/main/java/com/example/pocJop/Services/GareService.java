@@ -53,11 +53,12 @@ public class GareService {
     public GareDto createGare(Gare gare, MultipartFile file) {
         System.out.println("PATH: " + GARE_PLAN_UPLOAD_PATH);
         Path uploadPath = Paths.get(uploadDir + GARE_PLAN_UPLOAD_PATH +gare.getCode() + "/");
-        String filePath = Helpers.pathSavedFile(file, uploadPath);//pathSavedFile(file, gare);
+        String filePath = Helpers.pathSavedFile(file, uploadPath);
+        String fileImage = uploadDir + GARE_PLAN_UPLOAD_PATH +gare.getCode() + "/" + file.getOriginalFilename();
         if (filePath != null) {
 
-            gare.setPlanDeGare(filePath);
-            gare.setPlanDeGareSvg(filePath);
+            gare.setPlanDeGare(fileImage);
+            gare.setPlanDeGareSvg(fileImage);
             Gare createdGare = gareRepository.save(gare);
 
             if (createdGare.getId() != null) {
