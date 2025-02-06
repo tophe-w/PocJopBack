@@ -75,10 +75,10 @@ INSERT INTO Ligne (name) VALUES ('TER Centre-Val de Loire');
 
 
 -- Sites
-INSERT INTO site (name, town, description, capacity) VALUES ('Le Zénith de Nantes', 'Nantes', 'Site de concerts à Nantes.', 10000);
-INSERT INTO site (name, town, description, capacity) VALUES ('La Cité des Congrès', 'Nantes', 'Salle de conférence à Nantes.', 3000);
-INSERT INTO site (name, town, description, capacity) VALUES ('Le Grand Théâtre', 'Angers', 'Site culturel à Angers.', 5000);
-INSERT INTO site (name, town, description, capacity) VALUES ('La Beaujoire', 'Nantes', 'Stade de Nantes pour événements sportifs.', 35000);
+INSERT INTO site (name, town, description, photo, capacity) VALUES ('Le Zénith de Nantes', 'Nantes', 'Le Zénith de Nantes est une salle de spectacles inaugurée en 2006, pouvant accueillir jusqu''à 9 000 spectateurs. Conçu par l''Atelier Chaix & Morel, son architecture moderne en métal perforé se distingue par sa forme ovale.','upload/sites/photos/zentihNantes/zenith-nantes.jpeg', 9000);
+INSERT INTO site (name, town, description,photo, capacity) VALUES ('La Cité des Congrès', 'Nantes', 'La Cité des Congrès de Nantes, inaugurée en 1992, est un centre de congrès majeur en France, situé au cœur de Nantes, face à la gare TGV. Elle accueille chaque année plus de 300 événements économiques et culturels, réunissant plus de 600000 visiteurs,','upload/sites/photos/congresNantes/Cité-des-congres-Nantes.jpeg', 3000);
+INSERT INTO site (name, town, description,photo, capacity) VALUES ('Le Grand Théâtre', 'Angers', 'Le Grand Théâtre d''Angers, situé sur la place du Ralliement, est un édifice emblématique inauguré en 1871. Conçu par les architectes Alphonse Botrel et Auguste Magne, il est caractéristique des théâtres à l''italienne avec sa salle en fer à cheval et ses balcons ouverts, adaptés aux mondanités françaises.Le Grand Théâtre accueille une programmation variée, incluant théâtre, musique et opéra. Il est l''un des principaux lieux de représentation de la ville, hébergeant notamment des productions d''Angers-Nantes Opéra.','upload/sites/photos/theatreAngers/theatre-angers.jpeg', 5000);
+INSERT INTO site (name, town, description,photo, capacity) VALUES ('La Beaujoire', 'Nantes', 'Le Stade de la Beaujoire - Louis Fonteneau est le principal stade de la ville de Nantes, situé au 330 Route de Saint Joseph, dans le quartier Nantes Erdre. Inauguré le 8 mai 1984, il a été construit pour accueillir des matchs du Championnat d''Europe de football 1984.','upload/sites/photos/beaujoir/beaujoirNantes.jpeg', 35000);
 INSERT INTO site (name, town, description, capacity) VALUES ('Les Machines de l''île', 'Nantes', 'Site touristique et événementiel à Nantes.', 20000);
 INSERT INTO site (name, town, description, capacity) VALUES ('La Salle Paul Fort', 'Nantes', 'Salle pour concerts et événements culturels.', 1500);
 INSERT INTO site (name, town, description, capacity) VALUES ('La Maison de la Poésie', 'Nantes', 'Salle pour spectacles de poésie.', 500);
@@ -95,7 +95,7 @@ INSERT INTO gare (name, code, plan_de_gare, plan_de_gare_svg, accessibilite, reg
 INSERT INTO gare (name, code, plan_de_gare, plan_de_gare_svg, accessibilite, region_id) VALUES ('Gare de Les Sables-d''Olonne', 'GARE_DE_SABLES', 'upload/gares/plans/GARE_DE_SABLES/gare_des_sables.png', 'assets/gares/plan_de_gare_SABLES.svg', 'Accessible', (SELECT id FROM region WHERE name = 'Pays de la Loire'));
 INSERT INTO gare (name, code, plan_de_gare, plan_de_gare_svg, accessibilite, region_id) VALUES ('Gare de La Baule', 'GARE_DE_LA_BAULE', 'upload/gares/plans/GARE_DE_LA_BAULE/gare_de_la_baule-escoublac.jpg', 'assets/gares/plan_de_gare_LA_BAULE.svg', 'Accessible', (SELECT id FROM region WHERE name = 'Pays de la Loire'));
 INSERT INTO gare (name, code, plan_de_gare, plan_de_gare_svg, accessibilite, region_id) VALUES ('Gare d''Ancenis', 'GARE_DE_ANCENIS', 'upload/gares/plans/GARE_DE_ANCENIS/gare_de_ancenis.jpg', 'assets/gares/plan_de_gare_ANCENIS.svg', 'Accessible', (SELECT id FROM region WHERE name = 'Pays de la Loire'));
-INSERT INTO gare (name, code, plan_de_gare, plan_de_gare_svg, accessibilite, region_id) VALUES ('Gare de Laval', 'GARE_DE_LAVAL', 'upload/gares/plans/GARE_DE_LAVAL/gare_de_laval.jpg', 'assets/gares/plan_de_gare_LAVAL.svg', 'Accessible', (SELECT id FROM region WHERE name = 'Pays de la Loire'));
+
 
 -- Événements
 INSERT INTO event (name, start_event, end_event, description, nb_people_expected, site_id, category_id) VALUES ('Festival de la BD de Nantes', '2025-06-15 00:00:00', '2025-06-17 00:00:00', 'Festival de la bande dessinée', 20000, (SELECT id FROM site WHERE name = 'Le Zénith de Nantes'), (SELECT id FROM category WHERE name = 'Culture'));
@@ -176,14 +176,84 @@ INSERT INTO event (name, start_event, end_event, description, nb_people_expected
 INSERT INTO event (name, start_event, end_event, description, nb_people_expected, site_id, category_id) VALUES ('Exposition au Dome', '2025-06-25 00:00:00', '2025-07-10 00:00:00', 'Exposition d''art moderne à Montpellier.', 15000, (SELECT id FROM site WHERE name = 'Le Dome'), (SELECT id FROM category WHERE name = 'Culture'));
 -- Insertion des associations gare et site
 INSERT INTO site_gare (gare_id, site_id) VALUES ((SELECT id FROM gare WHERE name = 'Gare de Toulouse'), (SELECT id FROM site WHERE name = 'Parc des Expositions de Toulouse'));
+INSERT INTO site_gare (gare_id, site_id) VALUES ((SELECT id FROM gare WHERE name = 'Gare de Toulouse'), (SELECT id FROM site WHERE name = 'Aéroport de Toulouse-Blagnac'));
 INSERT INTO site_gare (gare_id, site_id) VALUES ((SELECT id FROM gare WHERE name = 'Gare de Montpellier'), (SELECT id FROM site WHERE name = 'Zénith Sud'));
 INSERT INTO site_gare (gare_id, site_id) VALUES ((SELECT id FROM gare WHERE name = 'Gare de Nîmes'), (SELECT id FROM site WHERE name = 'Parc des Expositions de Nîmes'));
 INSERT INTO site_gare (gare_id, site_id) VALUES ((SELECT id FROM gare WHERE name = 'Gare de Perpignan'), (SELECT id FROM site WHERE name = 'Arenas de Perpignan'));
 INSERT INTO site_gare (gare_id, site_id) VALUES ((SELECT id FROM gare WHERE name = 'Gare de Carcassonne'), (SELECT id FROM site WHERE name = 'Place du Capitole'));
-INSERT INTO site_gare (gare_id, site_id) VALUES ((SELECT id FROM gare WHERE name = 'Gare de Narbonne'), (SELECT id FROM site WHERE name = 'Parc des Expositions de Nîmes'));
 INSERT INTO site_gare (gare_id, site_id) VALUES ((SELECT id FROM gare WHERE name = 'Gare d''Albi'), (SELECT id FROM site WHERE name = 'Le Dome'));
 INSERT INTO site_gare (gare_id, site_id) VALUES ((SELECT id FROM gare WHERE name = 'Gare de Béziers'), (SELECT id FROM site WHERE name = 'Arena de Nîmes'));
-INSERT INTO site_gare (gare_id, site_id) VALUES ((SELECT id FROM gare WHERE name = 'Gare de Mende'), (SELECT id FROM site WHERE name = 'Parc des Expositions de Nîmes'));
+
+
+
+
+-- Pays de la Loire
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TGV'), (SELECT id FROM gare WHERE name = 'Gare de Nantes'));
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TER Pays de la Loire'), (SELECT id FROM gare WHERE name = 'Gare de Nantes'));
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TGV'), (SELECT id FROM gare WHERE name ='Gare d''Angers'));
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TER Pays de la Loire'), (SELECT id FROM gare WHERE name = 'Gare d''Angers'));
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TER Pays de la Loire'), (SELECT id FROM gare WHERE name = 'Gare de Saint-Nazaire'));
+
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TGV'), (SELECT id FROM gare WHERE name ='Gare de Saint-Nazaire'));
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TER Pays de la Loire'), (SELECT id FROM gare WHERE name = 'Gare de La Roche-sur-Yon'));
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TGV'), (SELECT id FROM gare WHERE name ='Gare de La Roche-sur-Yon'));
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TER Pays de la Loire'), (SELECT id FROM gare WHERE name = 'Gare de Cholet'));
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TGV'), (SELECT id FROM gare WHERE name ='Gare de Cholet'));
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TER Pays de la Loire'), (SELECT id FROM gare WHERE name = 'Gare de Les Sables-d''Olonne'));
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TGV'), (SELECT id FROM gare WHERE name ='Gare de Les Sables-d''Olonne'));
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TER Pays de la Loire'), (SELECT id FROM gare WHERE name = 'Gare de La Baule'));
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TGV'), (SELECT id FROM gare WHERE name ='Gare de La Baule'));
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TER Pays de la Loire'), (SELECT id FROM gare WHERE name = 'Gare d''Ancenis'));
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TGV'), (SELECT id FROM gare WHERE name ='Gare d''Ancenis'));
+
+
+-- Bretagne
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TGV'), (SELECT id FROM gare WHERE name = 'Gare de Rennes'));
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TER Bretagne'), (SELECT id FROM gare WHERE name = 'Gare de Rennes'));
+
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TGV'), (SELECT id FROM gare WHERE name = 'Gare de Brest'));
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TER Bretagne'), (SELECT id FROM gare WHERE name = 'Gare de Brest'));
+
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TGV'), (SELECT id FROM gare WHERE name = 'Gare de Saint-Malo'));
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TER Bretagne'), (SELECT id FROM gare WHERE name = 'Gare de Saint-Malo'));
+
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TGV'), (SELECT id FROM gare WHERE name = 'Gare de Lorient'));
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TER Bretagne'), (SELECT id FROM gare WHERE name = 'Gare de Lorient'));
+
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TGV'), (SELECT id FROM gare WHERE name = 'Gare de Quimper'));
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TER Bretagne'), (SELECT id FROM gare WHERE name = 'Gare de Quimper'));
+
+
+-- Occitanie
+
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TGV'), (SELECT id FROM gare WHERE name = 'Gare de Toulouse'));
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TER Occitanie'), (SELECT id FROM gare WHERE name = 'Gare de Toulouse'));
+
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TGV'), (SELECT id FROM gare WHERE name = 'Gare de Montpellier'));
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TER Occitanie'), (SELECT id FROM gare WHERE name = 'Gare de Montpellier'));
+
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TGV'), (SELECT id FROM gare WHERE name = 'Gare de Nîmes'));
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TER Occitanie'), (SELECT id FROM gare WHERE name = 'Gare de Nîmes'));
+
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TGV'), (SELECT id FROM gare WHERE name = 'Gare de Perpignan'));
+
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TER Occitanie'), (SELECT id FROM gare WHERE name = 'Gare de Perpignan'));
+
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TGV'), (SELECT id FROM gare WHERE name = 'Gare de Carcassonne'));
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TER Occitanie'), (SELECT id FROM gare WHERE name = 'Gare de Carcassonne'));
+
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TGV'), (SELECT id FROM gare WHERE name = 'Gare de Narbonne'));   
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TER Occitanie'), (SELECT id FROM gare WHERE name = 'Gare de Narbonne'));
+
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TGV'), (SELECT id FROM gare WHERE name = 'Gare d''Albi'));
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TER Occitanie'), (SELECT id FROM gare WHERE name = 'Gare d''Albi'));
+
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TGV'), (SELECT id FROM gare WHERE name = 'Gare de Béziers'));
+INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TER Occitanie'), (SELECT id FROM gare WHERE name = 'Gare de Béziers'));
+
+
+
+
 
 
 INSERT INTO date_calendar(date, day_of_month, month_name_abbr, day_name, day_name_abbr, month_name, year) SELECT datum AS date, EXTRACT(DAY FROM datum) AS day_of_month, TO_CHAR(datum,'Mon') AS month_name_abbr, TO_CHAR(datum,'Day') AS day_name, TO_CHAR(datum,'Dy') AS day_name_abbr, TO_CHAR(datum,'Month') AS month_name, EXTRACT(year FROM datum) "Year" FROM generate_series(DATE '2025-01-01',DATE '2025-12-31',INTERVAL '1 hour') as datum;
