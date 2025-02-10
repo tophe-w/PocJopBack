@@ -77,12 +77,12 @@ INSERT INTO site (name, town, description, photo, capacity) VALUES ('Le Zénith 
 INSERT INTO site (name, town, description,photo, capacity) VALUES ('La Cité des Congrès', 'Nantes', 'La Cité des Congrès de Nantes, inaugurée en 1992, est un centre de congrès majeur en France, situé au cœur de Nantes, face à la gare TGV. Elle accueille chaque année plus de 300 événements économiques et culturels.','upload/sites/photos/congresNantes/Cité-des-congres-Nantes.jpeg', 3000);
 INSERT INTO site (name, town, description,photo, capacity) VALUES ('Le Grand Théâtre', 'Angers', 'Le Grand Théâtre d''Angers, situé sur la place du Ralliement, est un édifice emblématique inauguré en 1871. Conçu par les architectes Alphonse Botrel et Auguste Magne, il est caractéristique des théâtres à l''italienne .','upload/sites/photos/theatreAngers/theatre-angers.jpeg', 5000);
 INSERT INTO site (name, town, description,photo, capacity) VALUES ('La Beaujoire', 'Nantes', 'Le Stade de la Beaujoire - Louis Fonteneau est le principal stade de la ville de Nantes, situé dans le quartier Nantes Erdre. Inauguré le 8 mai 1984, il a été construit pour accueillir des matchs du Championnat d''Europe de football 1984.','upload/sites/photos/beaujoir/beaujoirNantes.jpeg', 35000);
-INSERT INTO site (name, town, description, capacity) VALUES ('Les Machines de l''île', 'Nantes', 'Site touristique et événementiel à Nantes.', 20000);
-INSERT INTO site (name, town, description, capacity) VALUES ('La Salle Paul Fort', 'Nantes', 'Salle pour concerts et événements culturels.', 1500);
-INSERT INTO site (name, town, description, capacity) VALUES ('La Maison de la Poésie', 'Nantes', 'Salle pour spectacles de poésie.', 500);
-INSERT INTO site (name, town, description, capacity) VALUES ('Le Parc des Expositions de La Roche-sur-Yon', 'La Roche-sur-Yon', 'Site d''exposition à La Roche-sur-Yon.', 30000);
-INSERT INTO site (name, town, description, capacity) VALUES ('La Base sous-marine', 'Saint-Nazaire', 'Lieu culturel et événementiel à Saint-Nazaire.', 10000);
-INSERT INTO site (name, town, description, capacity) VALUES ('Le Théâtre Graslin', 'Nantes', 'Salle de théâtre à Nantes.', 1500);
+INSERT INTO site (name, town, description, photo,capacity) VALUES ('Les Machines de l''île', 'Nantes', 'Les Machines de l’île sont une attraction unique inspirée de l’univers de Jules Verne et de l’ingéniosité de Léonard de Vinci. Ce projet artistique et mécanique a vu le jour sur l’Île de Nantes, dans les anciens chantiers navals.','upload/sites/photos/machines-Nates/machines.jpg', 20000);
+INSERT INTO site (name, town, description,photo, capacity) VALUES ('La Salle Paul Fort', 'Nantes', 'Salle de spectacles à Nantes, connue pour sa programmation musicale variée et ses événements culturels.', 'upload/sites/photos/paulFort-Nantes/paulFort-Nantes.jpeg', 1500);
+INSERT INTO site (name, town, description, photo,capacity) VALUES ('La Maison de la Poésie', 'Nantes', 'La Maison de la Poésie est un lieu dédié à la promotion et à la diffusion de la poésie contemporaine sous toutes ses formes. Elle propose des événements autour de la littérature.', 'upload/sites/photos/MaisonPoesieNantes/poesie-nantes.jpeg', 500);
+INSERT INTO site (name, town, description,photo, capacity) VALUES ('Le Parc des Expositions de La Roche-sur-Yon', 'La Roche-sur-Yon', 'Le Parc des Expositions des Oudairies, situé à La Roche-sur-Yon, est un complexe polyvalent conçu pour accueillir une variété d''événements, tels que des salons professionnels, des expositions, des spectacles culturels et des manifestations sportives', 'upload/sites/photos/expoLaRoche/rochesuryon.jpg', 30000);
+INSERT INTO site (name, town, description,photo, capacity) VALUES ('La Base sous-marine', 'Saint-Nazaire', 'Construite pendant la Seconde Guerre mondiale par l''armée allemande, c''est un impressionnant bunker en béton armé destiné à abriter les sous-marins U-Boote. Après la guerre, cette structure imposante a été transformée en un espace culturel et touristique', 'upload/sites/photos/baseSousMarine/baseSaintNazaire.jpeg', 10000);
+INSERT INTO site (name, town, description, photo, capacity) VALUES ('Le Théâtre Graslin', 'Nantes', 'Théâtre à l''italienne du XVIIIe siècle à Nantes, réputé pour son acoustique et sa programmation d''opéras et de concerts.', 'upload/sites/photos/theatreNantes/graslinNantes.jpg', 1500);
 
 -- Gares
 INSERT INTO gare (name, code, plan_de_gare, plan_de_gare_svg, accessibilite, region_id) VALUES ('Gare de Nantes', 'GARE_DE_NANTES', 'upload/gares/plans/GARE_DE_NANTES/gare_nantes.jpg', 'assets/gares/plan_de_gare_NANTES.svg', 'Accessible', (SELECT id FROM region WHERE name = 'Pays de la Loire'));
@@ -111,18 +111,14 @@ INSERT INTO site_gare (site_id, gare_id) VALUES ((SELECT id FROM site WHERE name
 INSERT INTO site_gare (site_id, gare_id) VALUES ((SELECT id FROM site WHERE name = 'La Cité des Congrès'), (SELECT id FROM gare WHERE name = 'Gare de Nantes'));
 
 -- Insertion des sites
-INSERT INTO site (name, town, description, capacity) VALUES ('Parc des Expositions de Rennes', 'Rennes', 'Site d''expositions à Rennes.', 50000);
-INSERT INTO site (name, town, description, capacity) VALUES ('Plage du Sillon', 'Saint-Malo', 'Site du festival de Saint-Malo.', 40000);
-INSERT INTO site (name, town, description, capacity) VALUES ('Le Liberté', 'Rennes', 'Salle de concerts emblématique à Rennes.', 7000);
-INSERT INTO site (name, town, description, capacity) VALUES ('Quai de la Douane', 'Brest', 'Quai pour événements maritimes et culturels.', 15000);
-INSERT INTO site (name, town, description, capacity) VALUES ('Parc du Thabor', 'Rennes', 'Parc emblématique pour événements culturels et musicaux.', 20000);
-INSERT INTO site (name, town, description, capacity) VALUES ('Presqu''île de Crozon', 'Crozon', 'Site naturel pour événements culturels.', 60000);
-INSERT INTO site (name, town, description, capacity) VALUES ('Port de Paimpol', 'Paimpol', 'Site portuaire accueillant des festivals.', 100000);
+INSERT INTO site (name, town, description,photo, capacity) VALUES ('Parc des Expositions de Rennes', 'Rennes', 'Egalement connu sous le nom de Rennes Parc Expo, est un vaste complexe événementiel situé à Bruz, au sud-ouest de Rennes. Il s''étend sur une superficie totale de 110 000 m²,répartis en 11 halls modulables.','upload/sites/photos/expoRennes/parc-expo-rennes-3_2496.webp', 50000);
+INSERT INTO site (name, town, description,photo, capacity) VALUES ('Le Liberté', 'Rennes', 'Le Liberté est la principale salle de spectacles de Rennes, située entre l''Esplanade Charles de Gaulle et le boulevard de la Liberté. Ce lieu emblématique est conçu pour accueillir une variété d''événements culturels et sportifs.', 'upload/sites/photos/liberté/liberte-Rennes.jpeg',7000);
+INSERT INTO site (name, town, description,photo, capacity) VALUES ('Presqu''île de Crozon', 'Crozon', 'a Presqu ''île de Crozon, située dans le Finistère en Bretagne, est réputée pour ses paysages époustouflants et sa riche vie culturelle. Tout au long de l''année,de nombreux événements et festivals y sont organisés,attirant habitants et visiteurs.','upload/sites/photos/crozon/crozon.jpeg', 60000);
+INSERT INTO site (name, town, description, photo, capacity) VALUES ('Port de Paimpol', 'Paimpol', 'Entouré de charmantes rues pavées, de maisons traditionnelles en pierre et de commerces locaux, offrant une atmosphère authentique. Les quais sont animés par le va-et-vient des bateaux de pêche et de plaisance, créant une ambiance maritime unique.','upload/sites/photos/paimpol/paimpol.jpg', 100000);
 
 -- Insertion des gares
 INSERT INTO gare (name, code, plan_de_gare, plan_de_gare_svg, accessibilite, region_id) VALUES ('Gare de Rennes', 'GARE_DE_RENNES', 'upload/gares/plans/GARE_DE_RENNES/gare_de_rennes.jpg', 'assets/gares/plan_de_gare_RENNES.svg', 'Accessible', (SELECT id FROM region WHERE name = 'Bretagne'));
-INSERT INTO gare (name, code, plan_de_gare, plan_de_gare_svg, accessibilite, region_id) VALUES ('Gare de Brest', 'GARE_DE_BREST', 'upload/gares/plans/GARE_DE_BREST/gare_de_brest.jpg', 'assets/gares/plan_de_gare_BREST.svg', 'Accessible', (SELECT id FROM region WHERE name = 'Bretagne'));
-INSERT INTO gare (name, code, plan_de_gare, plan_de_gare_svg, accessibilite, region_id) VALUES ('Gare de Saint-Malo', 'GARE_DE_SAINT_MALO', 'upload/gares/plans/GARE_DE_SAINT_MALO/gare_de_saint_malo.png', 'assets/gares/plan_de_gare_SAINT_MALO.svg', 'Accessible', (SELECT id FROM region WHERE name = 'Bretagne'));
+
 INSERT INTO gare (name, code, plan_de_gare, plan_de_gare_svg, accessibilite, region_id) VALUES ('Gare de Lorient', 'GARE_DE_LORIENT', 'upload/gares/plans/GARE_DE_LORIENT/gare_de_lorient.jpg', 'assets/gares/plan_de_gare_LORIENT.svg', 'Accessible', (SELECT id FROM region WHERE name = 'Bretagne'));
 INSERT INTO gare (name, code, plan_de_gare, plan_de_gare_svg, accessibilite, region_id) VALUES ('Gare de Quimper', 'GARE_DE_QUIMPER', 'upload/gares/plans/GARE_DE_QUIMPER/gare_de_quimper.jpg', 'assets/gares/plan_de_gare_QUIMPER.svg', 'Accessible', (SELECT id FROM region WHERE name = 'Bretagne'));
 
@@ -133,31 +129,24 @@ INSERT INTO event (name, start_event, end_event, description, nb_people_expected
 
 -- Associations entre sites et gares
 INSERT INTO site_gare (site_id, gare_id) VALUES ((SELECT id FROM site WHERE name = 'Parc des Expositions de Rennes'), (SELECT id FROM gare WHERE name = 'Gare de Rennes'));
-INSERT INTO site_gare (site_id, gare_id) VALUES ((SELECT id FROM site WHERE name = 'Plage du Sillon'), (SELECT id FROM gare WHERE name = 'Gare de Saint-Malo'));
 INSERT INTO site_gare (site_id, gare_id) VALUES ((SELECT id FROM site WHERE name = 'Le Liberté'), (SELECT id FROM gare WHERE name = 'Gare de Rennes'));
-INSERT INTO site_gare (site_id, gare_id) VALUES ((SELECT id FROM site WHERE name = 'Quai de la Douane'), (SELECT id FROM gare WHERE name = 'Gare de Brest'));
+
 INSERT INTO site_gare (site_id, gare_id) VALUES ((SELECT id FROM site WHERE name = 'Presqu''île de Crozon'), (SELECT id FROM gare WHERE name = 'Gare de Quimper'));
 INSERT INTO site_gare (site_id, gare_id) VALUES ((SELECT id FROM site WHERE name = 'Port de Paimpol'), (SELECT id FROM gare WHERE name = 'Gare de Lorient'));
 
 -- Insertion des sites pour la région Occitanie
-INSERT INTO site (name, town, description, capacity) VALUES ('Parc des Expositions de Toulouse', 'Toulouse', 'Site d''expositions à Toulouse.', 70000);
-INSERT INTO site (name, town, description, capacity) VALUES ('Plage de Palavas', 'Palavas-les-Flots', 'Site balnéaire pour événements à Palavas.', 30000);
-INSERT INTO site (name, town, description, capacity) VALUES ('Zénith Sud', 'Montpellier', 'Salle de concerts à Montpellier.', 12000);
-INSERT INTO site (name, town, description, capacity) VALUES ('Aéroport de Toulouse-Blagnac', 'Toulouse', 'Site de festivals aériens et événementiels.', 25000);
-INSERT INTO site (name, town, description, capacity) VALUES ('Place du Capitole', 'Toulouse', 'Lieu culturel et historique pour événements.', 10000);
-INSERT INTO site (name, town, description, capacity) VALUES ('Le Dome', 'Montpellier', 'Salle polyvalente pour concerts et événements.', 15000);
-INSERT INTO site (name, town, description, capacity) VALUES ('Parc des Expositions de Nîmes', 'Nîmes', 'Site de foires et expositions à Nîmes.', 50000);
-INSERT INTO site (name, town, description, capacity) VALUES ('Arena de Nîmes', 'Nîmes', 'Arène historique pour concerts et spectacles.', 16000);
-INSERT INTO site (name, town, description, capacity) VALUES ('Arenas de Perpignan', 'Perpignan', 'Site pour événements culturels et concerts.', 20000);
-
+INSERT INTO site (name, town, description,photo, capacity) VALUES ('Parc des Expositions de Toulouse', 'Toulouse', 'Situé à Aussonne, au nord-ouest de Toulouse, il s''étend sur 55 hectares et propose des infrastructures modernes et modulables pour accueillir une variété d''événements professionnels et grand public.','upload/sites/photos/expoToulouse/expo-Toulouse.jpg', 70000);
+INSERT INTO site (name, town, description,photo, capacity) VALUES ('Plage de Palavas', 'Palavas-les-Flots', 'Située sur la côte méditerranéenne, est un lieu prisé pour l''organisation de divers événements tout au long de l''année. Son cadre idyllique de sable fin et ses infrastructures adaptées en font un site événementiel de choix.', 'upload/sites/photos/palavas/palavas.jpg',30000);
+INSERT INTO site (name, town, description,photo, capacity) VALUES ('Zénith Sud', 'Montpellier', 'Salle de concert modulable à Montpellier, pouvant accueillir jusqu''à 6 300 spectateurs pour divers événements culturels.','upload/sites/photos/zenithSud/zenith-de-face-2-4.jpg', 12000);
+INSERT INTO site (name, town, description,photo, capacity) VALUES ('Aéroport de Toulouse-Blagnac', 'Toulouse', 'Espace unique pouvant accueillir divers événements professionnels et grand public. Grâce à ses infrastructures modernes l''aéroport offre un cadre original et prestigieux pour des manifestations de grande envergure..', 'upload/sites/photos/aeroport toulouse/aeroport-toulouse.jpeg',25000);
+INSERT INTO site (name, town, description, photo,capacity) VALUES ('Place du Capitole', 'Toulouse', 'Située au cœur de Toulouse, est un lieu emblématique qui sert de cadre à de nombreux événements culturels, festifs et commémoratifs. Son vaste espace piétonnier et son architecture majestueuse en font un site privilégié pour les rassemblements publics.', 'upload/sites/photos/capitole/capitole.jpeg',10000);
+INSERT INTO site (name, town, description,photo, capacity) VALUES ('Arena de Nîmes', 'Nîmes', 'Edifiées à la fin du Ier siècle, sont l''un des amphithéâtres romains les mieux conservés au monde. Situées au cœur de Nîmes, dans le département du Gard, elles témoignent de l''architecture et de l''ingénierie romaines.','upload/sites/photos/nimes/arenesNimes.jpeg', 16000);
 -- Insertion des gares pour la région Occitanie
 INSERT INTO gare (name, code, plan_de_gare, plan_de_gare_svg, accessibilite, region_id) VALUES ('Gare de Toulouse', 'GARE_DE_TOULOUSE', 'upload/gares/plans/GARE_DE_TOULOUSE/gare_de_toulouse.jpg', 'assets/gares/plan_de_gare_TOULOUSE.svg', 'Accessible', (SELECT id FROM region WHERE name = 'Occitanie'));
 INSERT INTO gare (name, code, plan_de_gare, plan_de_gare_svg, accessibilite, region_id) VALUES ('Gare de Montpellier','GARE_DE_MONTPELLIER', 'upload/gares/plans/GARE_DE_MONTPELLIER/gare_de_montpellier.jpg', 'assets/gares/plan_de_gare_MONTPELLIER.svg', 'Accessible', (SELECT id FROM region WHERE name = 'Occitanie'));
 INSERT INTO gare (name, code, plan_de_gare, plan_de_gare_svg, accessibilite, region_id) VALUES ('Gare de Nîmes', 'GARE_DE_NIMES', 'upload/gares/plans/GARE_DE_NIMES/gare_de_nimes.jpg', 'assets/gares/plan_de_gare_NIMES.svg', 'Accessible', (SELECT id FROM region WHERE name = 'Occitanie'));
-INSERT INTO gare (name, code, plan_de_gare, plan_de_gare_svg, accessibilite, region_id) VALUES ('Gare de Perpignan', 'GARE_DE_PERPIGNAN', 'upload/gares/plans/GARE_DE_PERPIGNAN/gare_de_perpignan.jpg', 'assets/gares/plan_de_gare_PERPIGNAN.svg', 'Accessible', (SELECT id FROM region WHERE name = 'Occitanie'));
-INSERT INTO gare (name, code, plan_de_gare, plan_de_gare_svg, accessibilite, region_id) VALUES ('Gare de Carcassonne', 'GARE_DE_CARCASSONNE', 'upload/gares/plans/GARE_DE_CARCASSONNE/gare_de_carcassonne.jpg', 'assets/gares/plan_de_gare_CARCASSONNE.svg', 'Accessible', (SELECT id FROM region WHERE name = 'Occitanie'));
-INSERT INTO gare (name, code, plan_de_gare, plan_de_gare_svg, accessibilite, region_id) VALUES ('Gare de Narbonne', 'GARE_DE_NARBONNE', 'upload/gares/plans/GARE_DE_NARBONNE/gare_de_narbonne.jpg', 'assets/gares/plan_de_gare_NARBONNE.svg', 'Accessible', (SELECT id FROM region WHERE name = 'Occitanie'));
-INSERT INTO gare (name, code, plan_de_gare, plan_de_gare_svg, accessibilite, region_id) VALUES ('Gare d''Albi', 'GARE_D_ALBI', 'upload/gares/plans/GARE_D_ALBI/gare_de_albi.jpg', 'assets/gares/plan_de_gare_ALBI.svg', 'Accessible', (SELECT id FROM region WHERE name = 'Occitanie'));
+
+
 INSERT INTO gare (name, code, plan_de_gare, plan_de_gare_svg, accessibilite, region_id) VALUES ('Gare de Béziers', 'GARE_DE_BEZIERS', 'upload/gares/plans/GARE_DE_BEZIERS/gare_de_beziers.jpg', 'assets/gares/plan_de_gare_BEZIERS.svg', 'Accessible', (SELECT id FROM region WHERE name = 'Occitanie'));
 INSERT INTO gare (name, code, plan_de_gare, plan_de_gare_svg, accessibilite, region_id) VALUES ('Gare de Mende', 'GARE_DE_MENDE', 'upload/gares/plans/GARE_DE_MENDE/gare_de_mende.jpg', 'assets/gares/plan_de_gare_MENDE.svg', 'Accessible', (SELECT id FROM region WHERE name = 'Occitanie'));
 
@@ -167,17 +156,14 @@ INSERT INTO event (name, start_event, end_event, description, nb_people_expected
 INSERT INTO event (name, start_event, end_event, description, nb_people_expected, site_id, category_id) VALUES ('Concert au Zénith Sud', '2025-06-20 19:00:00', '2025-06-20 22:00:00', 'Concert rock au Zénith.', 12000, (SELECT id FROM site WHERE name = 'Zénith Sud'), (SELECT id FROM category WHERE name = 'Musique'));
 INSERT INTO event (name, start_event, end_event, description, nb_people_expected, site_id, category_id) VALUES ('Festival Aérien Toulouse', '2025-08-15 00:00:00', '2025-08-16 00:00:00', 'Festival aérien à Toulouse.', 25000, (SELECT id FROM site WHERE name = 'Aéroport de Toulouse-Blagnac'), (SELECT id FROM category WHERE name = 'Culture'));
 INSERT INTO event (name, start_event, end_event, description, nb_people_expected, site_id, category_id) VALUES ('Concert Place du Capitole', '2025-07-01 17:00:00', '2025-07-01 23:00:00', 'Concert en plein air sur la place du Capitole.', 10000, (SELECT id FROM site WHERE name = 'Place du Capitole'), (SELECT id FROM category WHERE name = 'Musique'));
-INSERT INTO event (name, start_event, end_event, description, nb_people_expected, site_id, category_id) VALUES ('Salon de l''auto', '2025-09-01 00:00:00', '2025-09-03 00:00:00', 'Salon automobile à Nîmes.', 50000, (SELECT id FROM site WHERE name = 'Parc des Expositions de Nîmes'), (SELECT id FROM category WHERE name = 'Culture'));
+
 INSERT INTO event (name, start_event, end_event, description, nb_people_expected, site_id, category_id) VALUES ('Concert Arena de Nîmes', '2025-07-14 14:00:00', '2025-07-14 23:00:00', 'Concert de musique classique à l''Arena de Nîmes.', 16000, (SELECT id FROM site WHERE name = 'Arena de Nîmes'), (SELECT id FROM category WHERE name = 'Musique'));
-INSERT INTO event (name, start_event, end_event, description, nb_people_expected, site_id, category_id) VALUES ('Exposition au Dome', '2025-06-25 00:00:00', '2025-07-10 00:00:00', 'Exposition d''art moderne à Montpellier.', 15000, (SELECT id FROM site WHERE name = 'Le Dome'), (SELECT id FROM category WHERE name = 'Culture'));
+
 -- Insertion des associations gare et site
 INSERT INTO site_gare (gare_id, site_id) VALUES ((SELECT id FROM gare WHERE name = 'Gare de Toulouse'), (SELECT id FROM site WHERE name = 'Parc des Expositions de Toulouse'));
 INSERT INTO site_gare (gare_id, site_id) VALUES ((SELECT id FROM gare WHERE name = 'Gare de Toulouse'), (SELECT id FROM site WHERE name = 'Aéroport de Toulouse-Blagnac'));
 INSERT INTO site_gare (gare_id, site_id) VALUES ((SELECT id FROM gare WHERE name = 'Gare de Montpellier'), (SELECT id FROM site WHERE name = 'Zénith Sud'));
-INSERT INTO site_gare (gare_id, site_id) VALUES ((SELECT id FROM gare WHERE name = 'Gare de Nîmes'), (SELECT id FROM site WHERE name = 'Parc des Expositions de Nîmes'));
-INSERT INTO site_gare (gare_id, site_id) VALUES ((SELECT id FROM gare WHERE name = 'Gare de Perpignan'), (SELECT id FROM site WHERE name = 'Arenas de Perpignan'));
-INSERT INTO site_gare (gare_id, site_id) VALUES ((SELECT id FROM gare WHERE name = 'Gare de Carcassonne'), (SELECT id FROM site WHERE name = 'Place du Capitole'));
-INSERT INTO site_gare (gare_id, site_id) VALUES ((SELECT id FROM gare WHERE name = 'Gare d''Albi'), (SELECT id FROM site WHERE name = 'Le Dome'));
+INSERT INTO site_gare (gare_id, site_id) VALUES ((SELECT id FROM gare WHERE name = 'Gare de Toulouse'), (SELECT id FROM site WHERE name = 'Place du Capitole'));
 INSERT INTO site_gare (gare_id, site_id) VALUES ((SELECT id FROM gare WHERE name = 'Gare de Béziers'), (SELECT id FROM site WHERE name = 'Arena de Nîmes'));
 
 
@@ -205,11 +191,8 @@ INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE n
 INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TGV'), (SELECT id FROM gare WHERE name = 'Gare de Rennes'));
 INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TER Bretagne'), (SELECT id FROM gare WHERE name = 'Gare de Rennes'));
 
-INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TGV'), (SELECT id FROM gare WHERE name = 'Gare de Brest'));
-INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TER Bretagne'), (SELECT id FROM gare WHERE name = 'Gare de Brest'));
 
-INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TGV'), (SELECT id FROM gare WHERE name = 'Gare de Saint-Malo'));
-INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TER Bretagne'), (SELECT id FROM gare WHERE name = 'Gare de Saint-Malo'));
+
 
 INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TGV'), (SELECT id FROM gare WHERE name = 'Gare de Lorient'));
 INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TER Bretagne'), (SELECT id FROM gare WHERE name = 'Gare de Lorient'));
@@ -227,22 +210,6 @@ INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE n
 
 INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TGV'), (SELECT id FROM gare WHERE name = 'Gare de Nîmes'));
 INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TER Occitanie'), (SELECT id FROM gare WHERE name = 'Gare de Nîmes'));
-
-INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TGV'), (SELECT id FROM gare WHERE name = 'Gare de Perpignan'));
-
-INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TER Occitanie'), (SELECT id FROM gare WHERE name = 'Gare de Perpignan'));
-
-INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TGV'), (SELECT id FROM gare WHERE name = 'Gare de Carcassonne'));
-INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TER Occitanie'), (SELECT id FROM gare WHERE name = 'Gare de Carcassonne'));
-
-INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TGV'), (SELECT id FROM gare WHERE name = 'Gare de Narbonne'));   
-INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TER Occitanie'), (SELECT id FROM gare WHERE name = 'Gare de Narbonne'));
-
-INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TGV'), (SELECT id FROM gare WHERE name = 'Gare d''Albi'));
-INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TER Occitanie'), (SELECT id FROM gare WHERE name = 'Gare d''Albi'));
-
-INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TGV'), (SELECT id FROM gare WHERE name = 'Gare de Béziers'));
-INSERT INTO ligne_gare (ligne_id, gare_id) VALUES ((SELECT id FROM ligne WHERE name = 'TER Occitanie'), (SELECT id FROM gare WHERE name = 'Gare de Béziers'));
 
 
 
